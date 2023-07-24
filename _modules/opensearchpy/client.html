@@ -15,7 +15,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
         <script src="../../_static/clipboard.min.js"></script>
         <script src="../../_static/copybutton.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -28,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> OpenSearch Python Client
-            <img src="../../_static/OpenSearch.svg" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            OpenSearch Python Client
+              <img src="../../_static/OpenSearch.svg" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -62,9 +68,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>opensearchpy.client</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">opensearchpy.client</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -101,6 +107,7 @@
 <span class="c1">#  specific language governing permissions and limitations</span>
 <span class="c1">#  under the License.</span>
 
+
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -113,7 +120,9 @@
 <span class="kn">from</span> <span class="nn">.indices</span> <span class="kn">import</span> <span class="n">IndicesClient</span>
 <span class="kn">from</span> <span class="nn">.ingest</span> <span class="kn">import</span> <span class="n">IngestClient</span>
 <span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">NodesClient</span>
+<span class="kn">from</span> <span class="nn">.plugins</span> <span class="kn">import</span> <span class="n">PluginsClient</span>
 <span class="kn">from</span> <span class="nn">.remote</span> <span class="kn">import</span> <span class="n">RemoteClient</span>
+<span class="kn">from</span> <span class="nn">.security</span> <span class="kn">import</span> <span class="n">SecurityClient</span>
 <span class="kn">from</span> <span class="nn">.snapshot</span> <span class="kn">import</span> <span class="n">SnapshotClient</span>
 <span class="kn">from</span> <span class="nn">.tasks</span> <span class="kn">import</span> <span class="n">TasksClient</span>
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">SKIP_IN_PATH</span><span class="p">,</span> <span class="n">_bulk_body</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">,</span> <span class="n">_normalize_hosts</span><span class="p">,</span> <span class="n">query_params</span>
@@ -121,9 +130,9 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;opensearch&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="OpenSearch"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch">[docs]</a><span class="k">class</span> <span class="nc">OpenSearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    OpenSearch low-level client. Provides a straightforward mapping from</span>
+<div class="viewcode-block" id="OpenSearch"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch">[docs]</a><span class="k">class</span> <span class="nc">OpenSearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    OpenSearch client. Provides a straightforward mapping from</span>
 <span class="sd">    Python to OpenSearch REST endpoints.</span>
 
 <span class="sd">    The instance has attributes ``cat``, ``cluster``, ``indices``, ``ingest``,</span>
@@ -247,7 +256,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transport_class</span><span class="o">=</span><span class="n">Transport</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :arg hosts: list of nodes, or a single node, we should connect to.</span>
 <span class="sd">            Node should be a dictionary ({&quot;host&quot;: &quot;localhost&quot;, &quot;port&quot;: 9200}),</span>
 <span class="sd">            the entire dictionary will be passed to the :class:`~opensearchpy.Connection`</span>
@@ -271,12 +280,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ingest</span> <span class="o">=</span> <span class="n">IngestClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">NodesClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remote</span> <span class="o">=</span> <span class="n">RemoteClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">security</span> <span class="o">=</span> <span class="n">SecurityClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">snapshot</span> <span class="o">=</span> <span class="n">SnapshotClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="n">TasksClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">FeaturesClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="OpenSearch.__repr__"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plugins</span> <span class="o">=</span> <span class="n">PluginsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="OpenSearch.__repr__"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.__repr__">[docs]</a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># get a list of all connections</span>
             <span class="n">cons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">hosts</span>
@@ -296,14 +308,14 @@
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="OpenSearch.close"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Closes the Transport and all internal connections&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="OpenSearch.close"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closes the Transport and all internal connections&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="c1"># AUTO-GENERATED-API-DEFINITIONS #</span>
-<div class="viewcode-block" id="OpenSearch.ping"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.ping">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.ping"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.ping">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns whether the cluster is running.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -314,9 +326,9 @@
         <span class="k">except</span> <span class="n">TransportError</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="OpenSearch.info"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.info">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.info"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.info">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns basic information about the cluster.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -324,7 +336,7 @@
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.create"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.create">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.create"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.create">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;pipeline&quot;</span><span class="p">,</span>
         <span class="s2">&quot;refresh&quot;</span><span class="p">,</span>
         <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
@@ -333,8 +345,8 @@
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a new document in the index.  Returns a 409 response when a document</span>
 <span class="sd">        with a same ID already exists in the index.</span>
 
@@ -342,7 +354,6 @@
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: Document ID</span>
 <span class="sd">        :arg body: The document</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg pipeline: The pipeline id to preprocess incoming documents</span>
 <span class="sd">            with</span>
 <span class="sd">        :arg refresh: If `true` then refresh the affected shards to make</span>
@@ -364,16 +375,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_create&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_create&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_create&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.index"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.index">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.index"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.index">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;if_primary_term&quot;</span><span class="p">,</span>
         <span class="s2">&quot;if_seq_no&quot;</span><span class="p">,</span>
         <span class="s2">&quot;op_type&quot;</span><span class="p">,</span>
@@ -386,14 +394,13 @@
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Creates or updates a document in an index.</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates or overwrites a document in an index.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg body: The document</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg id: Document ID</span>
 <span class="sd">        :arg if_primary_term: only perform the index operation if the</span>
 <span class="sd">            last operation that has changed the document has the specified primary</span>
@@ -427,8 +434,7 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
+        <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span> <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span> <span class="k">else</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
@@ -438,7 +444,7 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.bulk"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.bulk">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.bulk"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.bulk">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -449,16 +455,14 @@
         <span class="s2">&quot;timeout&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">bulk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">bulk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to perform multiple index/update/delete operations in a single request.</span>
 
 
 <span class="sd">        :arg body: The operation definition and data (action-data</span>
 <span class="sd">            pairs), separated by newlines</span>
 <span class="sd">        :arg index: Default index for items which don&#39;t provide one</span>
-<span class="sd">        :arg doc_type: Default document type for items which don&#39;t</span>
-<span class="sd">            provide one</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or default list of fields to return, can be overridden on each sub-</span>
 <span class="sd">            request</span>
@@ -488,15 +492,15 @@
         <span class="n">body</span> <span class="o">=</span> <span class="n">_bulk_body</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">serializer</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_bulk&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_bulk&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.clear_scroll"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.clear_scroll">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.clear_scroll"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.clear_scroll">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">clear_scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scroll_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Explicitly clears the search context for a scroll.</span>
 
 
@@ -515,7 +519,7 @@
             <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;/_search/scroll&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.count"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.count">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.count"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.count">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;allow_no_indices&quot;</span><span class="p">,</span>
         <span class="s2">&quot;analyze_wildcard&quot;</span><span class="p">,</span>
         <span class="s2">&quot;analyzer&quot;</span><span class="p">,</span>
@@ -531,16 +535,14 @@
         <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
         <span class="s2">&quot;terminate_after&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns number of documents matching a query.</span>
 
 
 <span class="sd">        :arg body: A query to restrict the results specified with the</span>
 <span class="sd">            Query DSL (optional)</span>
 <span class="sd">        :arg index: A comma-separated list of indices to restrict the</span>
-<span class="sd">            results</span>
-<span class="sd">        :arg doc_type: A comma-separated list of types to restrict the</span>
 <span class="sd">            results</span>
 <span class="sd">        :arg allow_no_indices: Whether to ignore if a wildcard indices</span>
 <span class="sd">            expression resolves into no concrete indices. (This includes `_all`</span>
@@ -572,13 +574,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_count&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_count&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.delete"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.delete">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.delete"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.delete">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;if_primary_term&quot;</span><span class="p">,</span>
         <span class="s2">&quot;if_seq_no&quot;</span><span class="p">,</span>
         <span class="s2">&quot;refresh&quot;</span><span class="p">,</span>
@@ -588,14 +590,13 @@
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Removes a document from the index.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg if_primary_term: only perform the delete operation if the</span>
 <span class="sd">            last operation that has changed the document has the specified primary</span>
 <span class="sd">            term</span>
@@ -621,14 +622,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
+        <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.delete_by_query"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.delete_by_query">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.delete_by_query"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.delete_by_query">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -663,16 +663,14 @@
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_completion&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">delete_by_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">delete_by_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Deletes documents matching the provided query.</span>
 
 
 <span class="sd">        :arg index: A comma-separated list of index names to search; use</span>
 <span class="sd">            `_all` or empty string to perform the operation on all indices</span>
 <span class="sd">        :arg body: The search definition using the Query DSL</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to</span>
-<span class="sd">            search; leave empty to perform the operation on all types</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -751,15 +749,15 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_delete_by_query&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_delete_by_query&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.delete_by_query_rethrottle"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.delete_by_query_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.delete_by_query_rethrottle"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.delete_by_query_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">delete_by_query_rethrottle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes the number of requests per second for a particular Delete By Query</span>
 <span class="sd">        operation.</span>
 
@@ -778,14 +776,15 @@
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.delete_script"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.delete_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.delete_script"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.delete_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;cluster_manager_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">delete_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Deletes a script.</span>
 
 
 <span class="sd">        :arg id: Script ID</span>
-<span class="sd">        :arg master_timeout: Specify timeout for connection to master</span>
+<span class="sd">        :arg master_timeout (Deprecated: use cluster_manager_timeout): Specify timeout for connection to master</span>
+<span class="sd">        :arg cluster_manager_timeout: Specify timeout for connection to cluster_manager</span>
 <span class="sd">        :arg timeout: Explicit operation timeout</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
@@ -795,7 +794,7 @@
             <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="s2">&quot;_scripts&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.exists"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.exists">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.exists"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.exists">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -807,15 +806,13 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns information about whether a document exists in an index.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
-<span class="sd">        :arg doc_type: The type of the document (use `_all` to fetch the</span>
-<span class="sd">            first document matching the ID across all types)</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -839,14 +836,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
+        <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;HEAD&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.exists_source"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.exists_source">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.exists_source"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.exists_source">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -857,15 +853,13 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">exists_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">exists_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns information about whether a document source exists in an index.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
-<span class="sd">        :arg doc_type: The type of the document; deprecated and optional</span>
-<span class="sd">            starting with 7.0</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -887,16 +881,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;HEAD&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.explain"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.explain">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.explain"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.explain">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -910,15 +901,14 @@
         <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
         <span class="s2">&quot;stored_fields&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">explain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">explain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns information about why a specific matches (or doesn&#39;t match) a query.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
 <span class="sd">        :arg body: The query definition using the Query DSL</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -945,16 +935,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_explain&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_explain&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_explain&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.field_caps"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.field_caps">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.field_caps"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.field_caps">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;allow_no_indices&quot;</span><span class="p">,</span>
         <span class="s2">&quot;expand_wildcards&quot;</span><span class="p">,</span>
         <span class="s2">&quot;fields&quot;</span><span class="p">,</span>
@@ -962,7 +949,7 @@
         <span class="s2">&quot;include_unmapped&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">field_caps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the information about the capabilities of fields among multiple</span>
 <span class="sd">        indices.</span>
 
@@ -990,7 +977,7 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.get"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.get">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.get"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.get">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1002,15 +989,13 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a document.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
-<span class="sd">        :arg doc_type: The type of the document (use `_all` to fetch the</span>
-<span class="sd">            first document matching the ID across all types)</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -1034,21 +1019,21 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
+        <span class="n">doc_type</span> <span class="o">=</span> <span class="s2">&quot;_doc&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.get_script"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.get_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.get_script"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.get_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;cluster_manager_timeout&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">get_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a script.</span>
 
 
 <span class="sd">        :arg id: Script ID</span>
-<span class="sd">        :arg master_timeout: Specify timeout for connection to master</span>
+<span class="sd">        :arg master_timeout (Deprecated: use cluster_manager_timeout): Specify timeout for connection to master</span>
+<span class="sd">        :arg cluster_manager_timeout: Specify timeout for connection to cluster_manager</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument &#39;id&#39;.&quot;</span><span class="p">)</span>
@@ -1057,7 +1042,7 @@
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="s2">&quot;_scripts&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.get_source"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.get_source">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.get_source"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.get_source">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1068,15 +1053,13 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">get_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">get_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the source of a document.</span>
 
 
 <span class="sd">        :arg index: The name of the index</span>
 <span class="sd">        :arg id: The document ID</span>
-<span class="sd">        :arg doc_type: The type of the document; deprecated and optional</span>
-<span class="sd">            starting with 7.0</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -1098,16 +1081,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.mget"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.mget">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.mget"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.mget">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1117,8 +1097,8 @@
         <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
         <span class="s2">&quot;stored_fields&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">mget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">mget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to get multiple documents in one request.</span>
 
 
@@ -1126,7 +1106,6 @@
 <span class="sd">            (containing full document information) or `ids` (when index and type is</span>
 <span class="sd">            provided in the URL.</span>
 <span class="sd">        :arg index: The name of the index</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -1148,13 +1127,13 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_mget&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_mget&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.msearch"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.msearch">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.msearch"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.msearch">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;ccs_minimize_roundtrips&quot;</span><span class="p">,</span>
         <span class="s2">&quot;max_concurrent_searches&quot;</span><span class="p">,</span>
         <span class="s2">&quot;max_concurrent_shard_requests&quot;</span><span class="p">,</span>
@@ -1163,8 +1142,8 @@
         <span class="s2">&quot;search_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;typed_keys&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">msearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">msearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to execute several search operations in one request.</span>
 
 
@@ -1172,8 +1151,6 @@
 <span class="sd">            definition pairs), separated by newlines</span>
 <span class="sd">        :arg index: A comma-separated list of index names to use as</span>
 <span class="sd">            default</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to use</span>
-<span class="sd">            as default</span>
 <span class="sd">        :arg ccs_minimize_roundtrips: Indicates whether network round-</span>
 <span class="sd">            trips should be minimized as part of cross-cluster search requests</span>
 <span class="sd">            execution  Default: true</span>
@@ -1203,23 +1180,21 @@
         <span class="n">body</span> <span class="o">=</span> <span class="n">_bulk_body</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">serializer</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_msearch&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_msearch&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.msearch_template"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.msearch_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.msearch_template"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.msearch_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;ccs_minimize_roundtrips&quot;</span><span class="p">,</span>
         <span class="s2">&quot;max_concurrent_searches&quot;</span><span class="p">,</span>
         <span class="s2">&quot;rest_total_hits_as_int&quot;</span><span class="p">,</span>
         <span class="s2">&quot;search_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;typed_keys&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">msearch_template</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">msearch_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to execute several search template operations in one request.</span>
 
 
@@ -1227,8 +1202,6 @@
 <span class="sd">            definition pairs), separated by newlines</span>
 <span class="sd">        :arg index: A comma-separated list of index names to use as</span>
 <span class="sd">            default</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to use</span>
-<span class="sd">            as default</span>
 <span class="sd">        :arg ccs_minimize_roundtrips: Indicates whether network round-</span>
 <span class="sd">            trips should be minimized as part of cross-cluster search requests</span>
 <span class="sd">            execution  Default: true</span>
@@ -1247,13 +1220,13 @@
         <span class="n">body</span> <span class="o">=</span> <span class="n">_bulk_body</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">serializer</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_msearch&quot;</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_msearch&quot;</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.mtermvectors"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.mtermvectors">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.mtermvectors"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.mtermvectors">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;field_statistics&quot;</span><span class="p">,</span>
         <span class="s2">&quot;fields&quot;</span><span class="p">,</span>
         <span class="s2">&quot;ids&quot;</span><span class="p">,</span>
@@ -1267,10 +1240,8 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">mtermvectors</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">mtermvectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns multiple termvectors in one request.</span>
 
 
@@ -1278,7 +1249,6 @@
 <span class="sd">            parameters per document here. You must at least provide a list of</span>
 <span class="sd">            document ids. See documentation.</span>
 <span class="sd">        :arg index: The index in which the document resides.</span>
-<span class="sd">        :arg doc_type: The type of the document.</span>
 <span class="sd">        :arg field_statistics: Specifies if document count, sum of</span>
 <span class="sd">            document frequencies and sum of total term frequencies should be</span>
 <span class="sd">            returned. Applies to all returned documents unless otherwise specified</span>
@@ -1311,25 +1281,23 @@
 <span class="sd">        :arg version_type: Specific version type  Valid choices:</span>
 <span class="sd">            internal, external, external_gte, force</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_mtermvectors&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_mtermvectors&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_mtermvectors&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.put_script"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.put_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.put_script"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.put_script">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;master_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;cluster_manager_timeout&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">put_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates or updates a script.</span>
 
 
 <span class="sd">        :arg id: Script ID</span>
 <span class="sd">        :arg body: The document</span>
 <span class="sd">        :arg context: Context name to compile script against</span>
-<span class="sd">        :arg master_timeout: Specify timeout for connection to master</span>
+<span class="sd">        :arg master_timeout (Deprecated: use cluster_manager_timeout): Specify timeout for connection to master</span>
+<span class="sd">        :arg cluster_manager_timeout: Specify timeout for connection to cluster_manager</span>
 <span class="sd">        :arg timeout: Explicit operation timeout</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
@@ -1344,11 +1312,11 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.rank_eval"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.rank_eval">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.rank_eval"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.rank_eval">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;allow_no_indices&quot;</span><span class="p">,</span> <span class="s2">&quot;expand_wildcards&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore_unavailable&quot;</span><span class="p">,</span> <span class="s2">&quot;search_type&quot;</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">rank_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to evaluate the quality of ranked search results over a set of typical</span>
 <span class="sd">        search queries</span>
 
@@ -1384,7 +1352,7 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.reindex"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.reindex">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.reindex"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.reindex">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;max_docs&quot;</span><span class="p">,</span>
         <span class="s2">&quot;refresh&quot;</span><span class="p">,</span>
         <span class="s2">&quot;requests_per_second&quot;</span><span class="p">,</span>
@@ -1395,7 +1363,7 @@
         <span class="s2">&quot;wait_for_completion&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">reindex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to copy documents from one index to another, optionally filtering the</span>
 <span class="sd">        source documents by a query, changing the destination index settings, or</span>
 <span class="sd">        fetching the documents from a remote cluster.</span>
@@ -1430,9 +1398,9 @@
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/_reindex&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.reindex_rethrottle"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.reindex_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.reindex_rethrottle"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.reindex_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">reindex_rethrottle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes the number of requests per second for a particular Reindex operation.</span>
 
 
@@ -1450,9 +1418,9 @@
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.render_search_template"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.render_search_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.render_search_template"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.render_search_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">render_search_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to use the Mustache language to pre-render a search definition.</span>
 
 
@@ -1467,9 +1435,9 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.scripts_painless_execute"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.scripts_painless_execute">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.scripts_painless_execute"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.scripts_painless_execute">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">scripts_painless_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows an arbitrary script to be executed and a result to be returned</span>
 
 
@@ -1488,9 +1456,9 @@
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.scroll"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.scroll">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;rest_total_hits_as_int&quot;</span><span class="p">,</span> <span class="s2">&quot;scroll&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.scroll"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.scroll">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;rest_total_hits_as_int&quot;</span><span class="p">,</span> <span class="s2">&quot;scroll&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">scroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scroll_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to retrieve a large numbers of results from a single search request.</span>
 
 
@@ -1513,7 +1481,7 @@
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/_search/scroll&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.search"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.search">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.search"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.search">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1558,16 +1526,14 @@
         <span class="s2">&quot;typed_keys&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns results matching a query.</span>
 
 
 <span class="sd">        :arg body: The search definition using the Query DSL</span>
 <span class="sd">        :arg index: A comma-separated list of index names to search; use</span>
 <span class="sd">            `_all` or empty string to perform the operation on all indices</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to</span>
-<span class="sd">            search; leave empty to perform the operation on all types</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -1668,13 +1634,13 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_search&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_search&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.search_shards"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.search_shards">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.search_shards"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.search_shards">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;allow_no_indices&quot;</span><span class="p">,</span>
         <span class="s2">&quot;expand_wildcards&quot;</span><span class="p">,</span>
         <span class="s2">&quot;ignore_unavailable&quot;</span><span class="p">,</span>
@@ -1683,7 +1649,7 @@
         <span class="s2">&quot;routing&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">search_shards</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns information about the indices and shards that a search request would be</span>
 <span class="sd">        executed against.</span>
 
@@ -1699,7 +1665,7 @@
 <span class="sd">        :arg ignore_unavailable: Whether specified concrete indices</span>
 <span class="sd">            should be ignored when unavailable (missing or closed)</span>
 <span class="sd">        :arg local: Return local information, do not retrieve the state</span>
-<span class="sd">            from master node (default: false)</span>
+<span class="sd">            from cluster_manager node (default: false)</span>
 <span class="sd">        :arg preference: Specify the node or shard the operation should</span>
 <span class="sd">            be performed on (default: random)</span>
 <span class="sd">        :arg routing: Specific routing value</span>
@@ -1708,7 +1674,7 @@
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_search_shards&quot;</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.search_template"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.search_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.search_template"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.search_template">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;allow_no_indices&quot;</span><span class="p">,</span>
         <span class="s2">&quot;ccs_minimize_roundtrips&quot;</span><span class="p">,</span>
         <span class="s2">&quot;expand_wildcards&quot;</span><span class="p">,</span>
@@ -1723,18 +1689,14 @@
         <span class="s2">&quot;search_type&quot;</span><span class="p">,</span>
         <span class="s2">&quot;typed_keys&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">search_template</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">search_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to use the Mustache language to pre-render a search definition.</span>
 
 
 <span class="sd">        :arg body: The search definition template and its params</span>
 <span class="sd">        :arg index: A comma-separated list of index names to search; use</span>
 <span class="sd">            `_all` or empty string to perform the operation on all indices</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to</span>
-<span class="sd">            search; leave empty to perform the operation on all types</span>
 <span class="sd">        :arg allow_no_indices: Whether to ignore if a wildcard indices</span>
 <span class="sd">            expression resolves into no concrete indices. (This includes `_all`</span>
 <span class="sd">            string or when no indices have been specified)</span>
@@ -1768,13 +1730,13 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;template&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.termvectors"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.termvectors">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.termvectors"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.termvectors">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;field_statistics&quot;</span><span class="p">,</span>
         <span class="s2">&quot;fields&quot;</span><span class="p">,</span>
         <span class="s2">&quot;offsets&quot;</span><span class="p">,</span>
@@ -1787,10 +1749,8 @@
         <span class="s2">&quot;version&quot;</span><span class="p">,</span>
         <span class="s2">&quot;version_type&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">termvectors</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">termvectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns information and statistics about terms in the fields of a particular</span>
 <span class="sd">        document.</span>
 
@@ -1798,7 +1758,6 @@
 <span class="sd">        :arg index: The index in which the document resides.</span>
 <span class="sd">        :arg body: Define parameters and or supply a document to get</span>
 <span class="sd">            termvectors for. See documentation.</span>
-<span class="sd">        :arg doc_type: The type of the document.</span>
 <span class="sd">        :arg id: The id of the document, when not specified a doc param</span>
 <span class="sd">            should be supplied.</span>
 <span class="sd">        :arg field_statistics: Specifies if document count, sum of</span>
@@ -1825,16 +1784,13 @@
         <span class="k">if</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument &#39;index&#39;.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_termvectors&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_termvectors&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_termvectors&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.update"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.update">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.update"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.update">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1848,8 +1804,8 @@
         <span class="s2">&quot;timeout&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Updates a document with a script or partial document.</span>
 
 
@@ -1857,7 +1813,6 @@
 <span class="sd">        :arg id: Document ID</span>
 <span class="sd">        :arg body: The request definition requires either `script` or</span>
 <span class="sd">            partial `doc`</span>
-<span class="sd">        :arg doc_type: The type of the document</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
 <span class="sd">        :arg _source_excludes: A list of fields to exclude from the</span>
@@ -1891,16 +1846,13 @@
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">doc_type</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_update&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;_update&quot;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_update&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.update_by_query"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.update_by_query">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.update_by_query"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.update_by_query">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;_source&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_excludes&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_source_includes&quot;</span><span class="p">,</span>
@@ -1937,10 +1889,8 @@
         <span class="s2">&quot;wait_for_active_shards&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wait_for_completion&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">update_by_query</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">update_by_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs an update on every document in the index without changing the source,</span>
 <span class="sd">        for example to pick up a mapping change.</span>
 
@@ -1948,7 +1898,6 @@
 <span class="sd">        :arg index: A comma-separated list of index names to search; use</span>
 <span class="sd">            `_all` or empty string to perform the operation on all indices</span>
 <span class="sd">        :arg body: The search definition using the Query DSL</span>
-<span class="sd">        :arg doc_type: A comma-separated list of document types to</span>
 <span class="sd">            search; leave empty to perform the operation on all types</span>
 <span class="sd">        :arg _source: True or false to return the _source field or not,</span>
 <span class="sd">            or a list of fields to return</span>
@@ -2031,15 +1980,15 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">doc_type</span><span class="p">,</span> <span class="s2">&quot;_update_by_query&quot;</span><span class="p">),</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_update_by_query&quot;</span><span class="p">),</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
             <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.update_by_query_rethrottle"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.update_by_query_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="OpenSearch.update_by_query_rethrottle"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.update_by_query_rethrottle">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span><span class="s2">&quot;requests_per_second&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">update_by_query_rethrottle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes the number of requests per second for a particular Update By Query</span>
 <span class="sd">        operation.</span>
 
@@ -2058,9 +2007,9 @@
             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.get_script_context"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.get_script_context">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.get_script_context"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.get_script_context">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">get_script_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns all script contexts.</span>
 
 
@@ -2073,9 +2022,9 @@
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/_script_context&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.get_script_languages"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.get_script_languages">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.get_script_languages"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.get_script_languages">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">get_script_languages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns available script types, languages and contexts</span>
 
 
@@ -2088,24 +2037,43 @@
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/_script_language&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.close_point_in_time"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.close_point_in_time">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">close_point_in_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Close a point in time</span>
-
-
-<span class="sd">        :arg body: a point-in-time id to close</span>
+<div class="viewcode-block" id="OpenSearch.list_all_point_in_time"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.list_all_point_in_time">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">list_all_point_in_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the list of active point in times searches</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
-            <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;/_pit&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
+            <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;point_in_time&quot;</span><span class="p">,</span> <span class="s2">&quot;_all&quot;</span><span class="p">),</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.open_point_in_time"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.open_point_in_time">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
+<div class="viewcode-block" id="OpenSearch.delete_point_in_time"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.delete_point_in_time">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">delete_point_in_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a point in time</span>
+
+
+<span class="sd">        :arg body: a point-in-time id to delete</span>
+<span class="sd">        :arg all: set it to `True` to delete all alive point in time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;point_in_time&quot;</span><span class="p">,</span> <span class="s2">&quot;_all&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">all</span>
+            <span class="k">else</span> <span class="n">_make_path</span><span class="p">(</span><span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;point_in_time&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
+            <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="OpenSearch.create_point_in_time"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.create_point_in_time">[docs]</a>    <span class="nd">@query_params</span><span class="p">(</span>
         <span class="s2">&quot;expand_wildcards&quot;</span><span class="p">,</span> <span class="s2">&quot;ignore_unavailable&quot;</span><span class="p">,</span> <span class="s2">&quot;keep_alive&quot;</span><span class="p">,</span> <span class="s2">&quot;preference&quot;</span><span class="p">,</span> <span class="s2">&quot;routing&quot;</span>
     <span class="p">)</span>
-    <span class="k">def</span> <span class="nf">open_point_in_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Open a point in time that can be used in subsequent searches</span>
+    <span class="k">def</span> <span class="nf">create_point_in_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a point in time that can be used in subsequent searches</span>
 
 
 <span class="sd">        :arg index: A comma-separated list of index names to open point</span>
@@ -2122,12 +2090,15 @@
 <span class="sd">        :arg routing: Specific routing value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
-            <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_pit&quot;</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+            <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+            <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_search&quot;</span><span class="p">,</span> <span class="s2">&quot;point_in_time&quot;</span><span class="p">),</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="OpenSearch.terms_enum"><a class="viewcode-back" href="../../api-ref/client.html#opensearchpy.OpenSearch.terms_enum">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
+<div class="viewcode-block" id="OpenSearch.terms_enum"><a class="viewcode-back" href="../../api-ref/clients/opensearch_client.html#opensearchpy.OpenSearch.terms_enum">[docs]</a>    <span class="nd">@query_params</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">terms_enum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The terms enum API  can be used to discover terms in the index that begin with</span>
 <span class="sd">        the provided string. It is designed for low-latency look-ups used in auto-</span>
 <span class="sd">        complete scenarios.</span>
