@@ -33,9 +33,8 @@
 # https://github.com/opensearch-project/opensearch-api-specification/blob/main/OpenSearch.openapi.json
 # -----------------------------------------------------
 
-from typing import Any, Collection, MutableMapping, Optional, Tuple, Union
-
 from .utils import NamespacedClient
+from typing import Any, Collection, MutableMapping, Optional, Tuple, Union
 
 class DanglingIndicesClient(NamespacedClient):
     async def delete_dangling_index(

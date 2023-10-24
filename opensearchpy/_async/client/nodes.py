@@ -35,7 +35,7 @@
 # -----------------------------------------------------
 
 
-from .utils import NamespacedClient, _make_path, query_params
+from .utils import _make_path, query_params, NamespacedClient
 
 
 class NodesClient(NamespacedClient):

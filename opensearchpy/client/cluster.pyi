@@ -33,9 +33,8 @@
 # https://github.com/opensearch-project/opensearch-api-specification/blob/main/OpenSearch.openapi.json
 # -----------------------------------------------------
 
-from typing import Any, Collection, MutableMapping, Optional, Tuple, Union
-
 from .utils import NamespacedClient
+from typing import Any, Collection, MutableMapping, Optional, Tuple, Union
 
 class ClusterClient(NamespacedClient):
     def health(
@@ -300,6 +299,7 @@ class ClusterClient(NamespacedClient):
         self,
         name: Any,
         *,
+        cluster_manager_timeout: Optional[Any] = ...,
         local: Optional[Any] = ...,
         master_timeout: Optional[Any] = ...,
         pretty: Optional[bool] = ...,

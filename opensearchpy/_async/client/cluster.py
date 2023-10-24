@@ -35,7 +35,7 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, NamespacedClient, _make_path, query_params
+from .utils import SKIP_IN_PATH, _make_path, query_params, NamespacedClient
 
 
 class ClusterClient(NamespacedClient):
@@ -386,13 +386,15 @@ class ClusterClient(NamespacedClient):
             body=body,
         )
 
-    @query_params("local", "master_timeout")
+    @query_params("cluster_manager_timeout", "local", "master_timeout")
     async def exists_component_template(self, name, params=None, headers=None):
         """
         Returns information about whether a particular component template exist.
 
 
         :arg name: The name of the template.
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
         :arg local: Return local information, do not retrieve the state
             from cluster-manager node. (default: false)
         :arg master_timeout (Deprecated: To promote inclusive language,

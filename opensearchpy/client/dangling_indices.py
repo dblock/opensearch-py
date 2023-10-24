@@ -35,7 +35,7 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, NamespacedClient, _make_path, query_params
+from .utils import SKIP_IN_PATH, _make_path, query_params, NamespacedClient
 
 
 class DanglingIndicesClient(NamespacedClient):
