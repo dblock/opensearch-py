@@ -32,12 +32,13 @@ from os.path import abspath, dirname, join
 from setuptools import find_packages, setup
 
 package_name = "opensearch-py"
+package_version = ""
 base_dir = abspath(dirname(__file__))
 
 with open(join(base_dir, package_name.replace("-", ""), "_version.py")) as f:
-    package_version = re.search(
-        r"__versionstr__\s+=\s+[\"\']([^\"\']+)[\"\']", f.read()
-    ).group(1)
+    m = re.search(r"__versionstr__\s+=\s+[\"\']([^\"\']+)[\"\']", f.read())
+    if m:
+        package_version = m.group(1)
 
 with open(join(base_dir, "README.md")) as f:
     long_description = f.read().strip()

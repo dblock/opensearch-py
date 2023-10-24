@@ -26,6 +26,8 @@
 
 import copy
 
+from .aggs import A, AggBase
+
 try:
     import collections.abc as collections_abc  # only works on python 3.3+
 except ImportError:
@@ -38,7 +40,6 @@ from opensearchpy.exceptions import TransportError
 from opensearchpy.helpers import scan
 
 from ..exceptions import IllegalOperation
-from ..helpers.aggs import A, AggBase
 from ..helpers.query import Bool, Q
 from .response import Hit, Response
 from .utils import AttrDict, DslBase, recursive_to_dict

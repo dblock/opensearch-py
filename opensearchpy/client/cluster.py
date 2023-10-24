@@ -6,25 +6,6 @@
 #
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
-#
-#  Licensed to Elasticsearch B.V. under one or more contributor
-#  license agreements. See the NOTICE file distributed with
-#  this work for additional information regarding copyright
-#  ownership. Elasticsearch B.V. licenses this file to you under
-#  the Apache License, Version 2.0 (the "License"); you may
-#  not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-# 	http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing,
-#  software distributed under the License is distributed on an
-#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-#  KIND, either express or implied.  See the License for the
-#  specific language governing permissions and limitations
-#  under the License.
-
-
 # ----------------------------------------------------
 # THIS CODE IS GENERATED AND MANUAL EDITS WILL BE LOST.
 #
@@ -35,7 +16,9 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, _make_path, query_params, NamespacedClient
+from typing import Any, MutableMapping, Optional
+
+from .utils import SKIP_IN_PATH, NamespacedClient, _make_path, query_params
 
 
 class ClusterClient(NamespacedClient):
@@ -54,7 +37,12 @@ class ClusterClient(NamespacedClient):
         "wait_for_nodes",
         "wait_for_status",
     )
-    def health(self, index=None, params=None, headers=None):
+    def health(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns basic information about the health of the cluster.
 
@@ -98,7 +86,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("cluster_manager_timeout", "local", "master_timeout")
-    def pending_tasks(self, params=None, headers=None):
+    def pending_tasks(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a list of any cluster-level changes (e.g. create index, update mapping,
         allocate or fail shard) which have not yet been executed.
@@ -127,7 +119,13 @@ class ClusterClient(NamespacedClient):
         "wait_for_metadata_version",
         "wait_for_timeout",
     )
-    def state(self, metric=None, index=None, params=None, headers=None):
+    def state(
+        self,
+        metric: Optional[Any] = None,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a comprehensive information about the state of the cluster.
 
@@ -170,7 +168,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("flat_settings", "timeout")
-    def stats(self, node_id=None, params=None, headers=None):
+    def stats(
+        self,
+        node_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns high-level overview of cluster statistics.
 
@@ -201,7 +204,12 @@ class ClusterClient(NamespacedClient):
         "retry_failed",
         "timeout",
     )
-    def reroute(self, body=None, params=None, headers=None):
+    def reroute(
+        self,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to manually change the allocation of individual shards in the cluster.
 
@@ -234,7 +242,11 @@ class ClusterClient(NamespacedClient):
         "master_timeout",
         "timeout",
     )
-    def get_settings(self, params=None, headers=None):
+    def get_settings(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns cluster settings.
 
@@ -257,7 +269,12 @@ class ClusterClient(NamespacedClient):
     @query_params(
         "cluster_manager_timeout", "flat_settings", "master_timeout", "timeout"
     )
-    def put_settings(self, body, params=None, headers=None):
+    def put_settings(
+        self,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Updates the cluster settings.
 
@@ -281,7 +298,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params()
-    def remote_info(self, params=None, headers=None):
+    def remote_info(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns the information about configured remote clusters.
 
@@ -291,7 +312,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("include_disk_info", "include_yes_decisions")
-    def allocation_explain(self, body=None, params=None, headers=None):
+    def allocation_explain(
+        self,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Provides explanations for shard allocations in the cluster.
 
@@ -312,7 +338,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("cluster_manager_timeout", "master_timeout", "timeout")
-    def delete_component_template(self, name, params=None, headers=None):
+    def delete_component_template(
+        self,
+        name: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Deletes a component template.
 
@@ -336,7 +367,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("cluster_manager_timeout", "local", "master_timeout")
-    def get_component_template(self, name=None, params=None, headers=None):
+    def get_component_template(
+        self,
+        name: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns one or more component templates.
 
@@ -358,7 +394,13 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("cluster_manager_timeout", "create", "master_timeout", "timeout")
-    def put_component_template(self, name, body, params=None, headers=None):
+    def put_component_template(
+        self,
+        name: Any,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Creates or updates a component template.
 
@@ -387,7 +429,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("cluster_manager_timeout", "local", "master_timeout")
-    def exists_component_template(self, name, params=None, headers=None):
+    def exists_component_template(
+        self,
+        name: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> bool:
         """
         Returns information about whether a particular component template exist.
 
@@ -412,7 +459,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("wait_for_removal")
-    def delete_voting_config_exclusions(self, params=None, headers=None):
+    def delete_voting_config_exclusions(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Clears cluster voting config exclusions.
 
@@ -429,7 +480,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params("node_ids", "node_names", "timeout")
-    def post_voting_config_exclusions(self, params=None, headers=None):
+    def post_voting_config_exclusions(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Updates the cluster voting config exclusions by node ids or node names.
 
@@ -447,7 +502,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params()
-    def delete_decommission_awareness(self, params=None, headers=None):
+    def delete_decommission_awareness(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Delete any existing decommission.
 
@@ -460,7 +519,11 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params()
-    def delete_weighted_routing(self, params=None, headers=None):
+    def delete_weighted_routing(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Delete weighted shard routing weights.
 
@@ -474,8 +537,11 @@ class ClusterClient(NamespacedClient):
 
     @query_params()
     def get_decommission_awareness(
-        self, awareness_attribute_name, params=None, headers=None
-    ):
+        self,
+        awareness_attribute_name: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Get details and status of decommissioned attribute.
 
@@ -501,7 +567,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params()
-    def get_weighted_routing(self, attribute, params=None, headers=None):
+    def get_weighted_routing(
+        self,
+        attribute: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Fetches weighted shard routing weights.
 
@@ -521,11 +592,11 @@ class ClusterClient(NamespacedClient):
     @query_params()
     def put_decommission_awareness(
         self,
-        awareness_attribute_name,
-        awareness_attribute_value,
-        params=None,
-        headers=None,
-    ):
+        awareness_attribute_name: Any,
+        awareness_attribute_value: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Decommissions an awareness attribute.
 
@@ -551,7 +622,12 @@ class ClusterClient(NamespacedClient):
         )
 
     @query_params()
-    def put_weighted_routing(self, attribute, params=None, headers=None):
+    def put_weighted_routing(
+        self,
+        attribute: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Updates weighted shard routing weights.
 

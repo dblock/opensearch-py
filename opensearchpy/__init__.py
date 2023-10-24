@@ -19,7 +19,7 @@
 #
 #  Unless required by applicable law or agreed to in writing,
 #  software distributed under the License is distributed on an
-#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+#
 #  KIND, either express or implied.  See the License for the
 #  specific language governing permissions and limitations
 #  under the License.
@@ -30,14 +30,110 @@ from __future__ import absolute_import
 
 import logging
 import re
-import sys
 import warnings
 
+from ._async.client import AsyncOpenSearch
+from ._async.http_aiohttp import AIOHttpConnection, AsyncConnection
+from ._async.transport import AsyncTransport
 from ._version import __versionstr__
+from .client import OpenSearch
+from .connection import (
+    AsyncHttpConnection,
+    Connection,
+    RequestsHttpConnection,
+    Urllib3HttpConnection,
+    connections,
+)
+from .connection_pool import ConnectionPool, ConnectionSelector, RoundRobinSelector
+from .exceptions import (
+    AuthenticationException,
+    AuthorizationException,
+    ConflictError,
+    ConnectionError,
+    ConnectionTimeout,
+    IllegalOperation,
+    ImproperlyConfigured,
+    NotFoundError,
+    OpenSearchDeprecationWarning,
+    OpenSearchDslException,
+    OpenSearchException,
+    OpenSearchWarning,
+    RequestError,
+    SerializationError,
+    SSLError,
+    TransportError,
+    UnknownDslObject,
+    ValidationException,
+)
+from .helpers import AWSV4SignerAsyncAuth, AWSV4SignerAuth
+from .helpers.aggs import A
+from .helpers.analysis import Analyzer, CharFilter, Normalizer, TokenFilter, Tokenizer
+from .helpers.document import Document, InnerDoc, MetaField
+from .helpers.faceted_search import (
+    DateHistogramFacet,
+    Facet,
+    FacetedResponse,
+    FacetedSearch,
+    HistogramFacet,
+    NestedFacet,
+    RangeFacet,
+    TermsFacet,
+)
+from .helpers.field import (
+    Binary,
+    Boolean,
+    Byte,
+    Completion,
+    CustomField,
+    Date,
+    DateRange,
+    DenseVector,
+    Double,
+    DoubleRange,
+    Field,
+    Float,
+    FloatRange,
+    GeoPoint,
+    GeoShape,
+    HalfFloat,
+    Integer,
+    IntegerRange,
+    Ip,
+    IpRange,
+    Join,
+    Keyword,
+    Long,
+    LongRange,
+    Murmur3,
+    Nested,
+    Object,
+    Percolator,
+    RangeField,
+    RankFeature,
+    RankFeatures,
+    ScaledFloat,
+    SearchAsYouType,
+    Short,
+    SparseVector,
+    Text,
+    TokenCount,
+    construct_field,
+)
+from .helpers.function import SF
+from .helpers.index import Index, IndexTemplate
+from .helpers.mapping import Mapping
+from .helpers.query import Q
+from .helpers.search import MultiSearch, Search
+from .helpers.update_by_query import UpdateByQuery
+from .helpers.utils import AttrDict, AttrList, DslBase
+from .helpers.wrappers import Range
+from .serializer import JSONSerializer
+from .transport import Transport
 
 _major, _minor, _patch = [
     int(x) for x in re.search(r"^(\d+)\.(\d+)\.(\d+)", __versionstr__).groups()
 ]
+
 VERSION = __version__ = (_major, _minor, _patch)
 
 logger = logging.getLogger("opensearch")
@@ -141,7 +237,7 @@ from .helpers.wrappers import Range
 from .serializer import JSONSerializer
 from .transport import Transport
 
-# Only raise one warning per deprecation message so as not
+# Only raise one warning per deprecation message so
 # to spam up the user if the same action is done multiple times.
 warnings.simplefilter("default", category=OpenSearchDeprecationWarning, append=True)
 
@@ -246,17 +342,14 @@ __all__ = [
     "normalizer",
     "token_filter",
     "tokenizer",
-]
-
-from ._async.client import AsyncOpenSearch
-from ._async.http_aiohttp import AIOHttpConnection, AsyncConnection
-from ._async.transport import AsyncTransport
-from .connection import AsyncHttpConnection
-
-__all__ += [
     "AIOHttpConnection",
     "AsyncConnection",
     "AsyncTransport",
     "AsyncOpenSearch",
     "AsyncHttpConnection",
 ]
+
+from ._async.client import AsyncOpenSearch
+from ._async.http_aiohttp import AIOHttpConnection, AsyncConnection
+from ._async.transport import AsyncTransport
+from .connection import AsyncHttpConnection

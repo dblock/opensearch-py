@@ -26,19 +26,20 @@
 
 
 from queue import Queue
+from typing import Tuple, Type, Union
 from urllib.parse import quote, quote_plus, unquote, urlencode, urlparse
 
 string_types = str, bytes
 map = map
 
 
-def to_str(x, encoding="ascii"):
+def to_str(x: Union[str, bytes], encoding: str = "ascii") -> str:
     if not isinstance(x, str):
         return x.decode(encoding)
     return x
 
 
-def to_bytes(x, encoding="ascii"):
+def to_bytes(x: Union[str, bytes], encoding: str = "ascii") -> bytes:
     if not isinstance(x, bytes):
         return x.encode(encoding)
     return x
@@ -51,7 +52,7 @@ except ImportError:
 
 
 try:
-    reraise_exceptions = (RecursionError,)
+    reraise_exceptions: Tuple[Type[Exception], ...] = (RecursionError,)
 except NameError:
     reraise_exceptions = ()
 

@@ -36,10 +36,10 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, _normalize_hosts, _make_path, query_params, _bulk_body
 from __future__ import unicode_literals
 
 import logging
+from typing import Any, MutableMapping, Optional
 
 from ..transport import AsyncTransport, TransportError
 from .cat import CatClient
@@ -54,6 +54,7 @@ from .remote import RemoteClient
 from .security import SecurityClient
 from .snapshot import SnapshotClient
 from .tasks import TasksClient
+from .utils import SKIP_IN_PATH, _bulk_body, _make_path, _normalize_hosts, query_params
 
 logger = logging.getLogger("opensearch")
 
@@ -248,7 +249,11 @@ class AsyncOpenSearch(object):
 
     # AUTO-GENERATED-API-DEFINITIONS #
     @query_params()
-    async def ping(self, params=None, headers=None):
+    async def ping(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> bool:
         """
         Returns whether the cluster is running.
 
@@ -261,7 +266,11 @@ class AsyncOpenSearch(object):
             return False
 
     @query_params()
-    async def info(self, params=None, headers=None):
+    async def info(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns basic information about the cluster.
 
@@ -279,7 +288,14 @@ class AsyncOpenSearch(object):
         "version_type",
         "wait_for_active_shards",
     )
-    async def create(self, index, id, body, params=None, headers=None):
+    async def create(
+        self,
+        index: Any,
+        id: Any,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Creates a new document in the index.  Returns a 409 response when a document
         with a same ID already exists in the index.
@@ -328,7 +344,14 @@ class AsyncOpenSearch(object):
         "version_type",
         "wait_for_active_shards",
     )
-    async def index(self, index, body, id=None, params=None, headers=None):
+    async def index(
+        self,
+        index: Any,
+        body: Any,
+        id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Creates or updates a document in an index.
 
@@ -385,7 +408,13 @@ class AsyncOpenSearch(object):
         "timeout",
         "wait_for_active_shards",
     )
-    async def bulk(self, body, index=None, params=None, headers=None):
+    async def bulk(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to perform multiple index/update/delete operations in a single request.
 
@@ -429,7 +458,13 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def clear_scroll(self, body=None, scroll_id=None, params=None, headers=None):
+    async def clear_scroll(
+        self,
+        body: Optional[Any] = None,
+        scroll_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Explicitly clears the search context for a scroll.
 
@@ -470,7 +505,13 @@ class AsyncOpenSearch(object):
         "routing",
         "terminate_after",
     )
-    async def count(self, body=None, index=None, params=None, headers=None):
+    async def count(
+        self,
+        body: Optional[Any] = None,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns number of documents matching a query.
 
@@ -526,7 +567,13 @@ class AsyncOpenSearch(object):
         "version_type",
         "wait_for_active_shards",
     )
-    async def delete(self, index, id, params=None, headers=None):
+    async def delete(
+        self,
+        index: Any,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Removes a document from the index.
 
@@ -595,7 +642,13 @@ class AsyncOpenSearch(object):
         "wait_for_active_shards",
         "wait_for_completion",
     )
-    async def delete_by_query(self, index, body, params=None, headers=None):
+    async def delete_by_query(
+        self,
+        index: Any,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Deletes documents matching the provided query.
 
@@ -688,7 +741,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("requests_per_second")
-    async def delete_by_query_rethrottle(self, task_id, params=None, headers=None):
+    async def delete_by_query_rethrottle(
+        self,
+        task_id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Changes the number of requests per second for a particular Delete By Query
         operation.
@@ -709,7 +767,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("cluster_manager_timeout", "master_timeout", "timeout")
-    async def delete_script(self, id, params=None, headers=None):
+    async def delete_script(
+        self,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Deletes a script.
 
@@ -741,7 +804,13 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def exists(self, index, id, params=None, headers=None):
+    async def exists(
+        self,
+        index: Any,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> bool:
         """
         Returns information about whether a document exists in an index.
 
@@ -786,7 +855,13 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def exists_source(self, index, id, params=None, headers=None):
+    async def exists_source(
+        self,
+        index: Any,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> bool:
         """
         Returns information about whether a document source exists in an index.
 
@@ -834,7 +909,14 @@ class AsyncOpenSearch(object):
         "routing",
         "stored_fields",
     )
-    async def explain(self, index, id, body=None, params=None, headers=None):
+    async def explain(
+        self,
+        index: Any,
+        id: Any,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about why a specific matches (or doesn't match) a query.
 
@@ -881,7 +963,13 @@ class AsyncOpenSearch(object):
         "ignore_unavailable",
         "include_unmapped",
     )
-    async def field_caps(self, body=None, index=None, params=None, headers=None):
+    async def field_caps(
+        self,
+        body: Optional[Any] = None,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns the information about the capabilities of fields among multiple
         indices.
@@ -922,7 +1010,13 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def get(self, index, id, params=None, headers=None):
+    async def get(
+        self,
+        index: Any,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a document.
 
@@ -957,7 +1051,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("cluster_manager_timeout", "master_timeout")
-    async def get_script(self, id, params=None, headers=None):
+    async def get_script(
+        self,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a script.
 
@@ -987,7 +1086,13 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def get_source(self, index, id, params=None, headers=None):
+    async def get_source(
+        self,
+        index: Any,
+        id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns the source of a document.
 
@@ -1031,7 +1136,13 @@ class AsyncOpenSearch(object):
         "routing",
         "stored_fields",
     )
-    async def mget(self, body, index=None, params=None, headers=None):
+    async def mget(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to get multiple documents in one request.
 
@@ -1076,7 +1187,13 @@ class AsyncOpenSearch(object):
         "search_type",
         "typed_keys",
     )
-    async def msearch(self, body, index=None, params=None, headers=None):
+    async def msearch(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to execute several search operations in one request.
 
@@ -1128,7 +1245,13 @@ class AsyncOpenSearch(object):
         "search_type",
         "typed_keys",
     )
-    async def msearch_template(self, body, index=None, params=None, headers=None):
+    async def msearch_template(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to execute several search template operations in one request.
 
@@ -1176,7 +1299,13 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def mtermvectors(self, body=None, index=None, params=None, headers=None):
+    async def mtermvectors(
+        self,
+        body: Optional[Any] = None,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns multiple termvectors in one request.
 
@@ -1224,7 +1353,14 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("cluster_manager_timeout", "master_timeout", "timeout")
-    async def put_script(self, id, body, context=None, params=None, headers=None):
+    async def put_script(
+        self,
+        id: Any,
+        body: Any,
+        context: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Creates or updates a script.
 
@@ -1254,7 +1390,13 @@ class AsyncOpenSearch(object):
     @query_params(
         "allow_no_indices", "expand_wildcards", "ignore_unavailable", "search_type"
     )
-    async def rank_eval(self, body, index=None, params=None, headers=None):
+    async def rank_eval(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to evaluate the quality of ranked search results over a set of typical
         search queries.
@@ -1296,7 +1438,12 @@ class AsyncOpenSearch(object):
         "wait_for_active_shards",
         "wait_for_completion",
     )
-    async def reindex(self, body, params=None, headers=None):
+    async def reindex(
+        self,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to copy documents from one index to another, optionally filtering the
         source documents by a query, changing the destination index settings, or
@@ -1333,7 +1480,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("requests_per_second")
-    async def reindex_rethrottle(self, task_id, params=None, headers=None):
+    async def reindex_rethrottle(
+        self,
+        task_id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Changes the number of requests per second for a particular Reindex operation.
 
@@ -1354,8 +1506,12 @@ class AsyncOpenSearch(object):
 
     @query_params()
     async def render_search_template(
-        self, body=None, id=None, params=None, headers=None
-    ):
+        self,
+        body: Optional[Any] = None,
+        id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to use the Mustache language to pre-render a search definition.
 
@@ -1372,7 +1528,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def scripts_painless_execute(self, body=None, params=None, headers=None):
+    async def scripts_painless_execute(
+        self,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows an arbitrary script to be executed and a result to be returned.
 
@@ -1388,7 +1549,13 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("rest_total_hits_as_int", "scroll")
-    async def scroll(self, body=None, scroll_id=None, params=None, headers=None):
+    async def scroll(
+        self,
+        body: Optional[Any] = None,
+        scroll_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to retrieve a large numbers of results from a single search request.
 
@@ -1462,7 +1629,13 @@ class AsyncOpenSearch(object):
         "typed_keys",
         "version",
     )
-    async def search(self, body=None, index=None, params=None, headers=None):
+    async def search(
+        self,
+        body: Optional[Any] = None,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns results matching a query.
 
@@ -1582,7 +1755,12 @@ class AsyncOpenSearch(object):
         "preference",
         "routing",
     )
-    async def search_shards(self, index=None, params=None, headers=None):
+    async def search_shards(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about the indices and shards that a search request would be
         executed against.
@@ -1623,7 +1801,13 @@ class AsyncOpenSearch(object):
         "search_type",
         "typed_keys",
     )
-    async def search_template(self, body, index=None, params=None, headers=None):
+    async def search_template(
+        self,
+        body: Any,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Allows to use the Mustache language to pre-render a search definition.
 
@@ -1685,7 +1869,14 @@ class AsyncOpenSearch(object):
         "version",
         "version_type",
     )
-    async def termvectors(self, index, body=None, id=None, params=None, headers=None):
+    async def termvectors(
+        self,
+        index: Any,
+        body: Optional[Any] = None,
+        id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information and statistics about terms in the fields of a particular
         document.
@@ -1740,7 +1931,14 @@ class AsyncOpenSearch(object):
         "timeout",
         "wait_for_active_shards",
     )
-    async def update(self, index, id, body, params=None, headers=None):
+    async def update(
+        self,
+        index: Any,
+        id: Any,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Updates a document with a script or partial document.
 
@@ -1822,7 +2020,13 @@ class AsyncOpenSearch(object):
         "wait_for_active_shards",
         "wait_for_completion",
     )
-    async def update_by_query(self, index, body=None, params=None, headers=None):
+    async def update_by_query(
+        self,
+        index: Any,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Performs an update on every document in the index without changing the source,
         for example to pick up a mapping change.
@@ -1916,7 +2120,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params("requests_per_second")
-    async def update_by_query_rethrottle(self, task_id, params=None, headers=None):
+    async def update_by_query_rethrottle(
+        self,
+        task_id: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Changes the number of requests per second for a particular Update By Query
         operation.
@@ -1937,7 +2146,11 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def get_script_context(self, params=None, headers=None):
+    async def get_script_context(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns all script contexts.
 
@@ -1947,7 +2160,11 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def get_script_languages(self, params=None, headers=None):
+    async def get_script_languages(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns available script types, languages and contexts.
 
@@ -1963,7 +2180,12 @@ class AsyncOpenSearch(object):
         "preference",
         "routing",
     )
-    async def create_pit(self, index, params=None, headers=None):
+    async def create_pit(
+        self,
+        index: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Creates point in time context.
 
@@ -1991,7 +2213,11 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def delete_all_pits(self, params=None, headers=None):
+    async def delete_all_pits(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Deletes all active point in time searches.
 
@@ -2001,7 +2227,12 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def delete_pit(self, body=None, params=None, headers=None):
+    async def delete_pit(
+        self,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Deletes one or more point in time searches based on the IDs passed.
 
@@ -2017,7 +2248,11 @@ class AsyncOpenSearch(object):
         )
 
     @query_params()
-    async def get_all_pits(self, params=None, headers=None):
+    async def get_all_pits(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Lists all active point in time searches.
 

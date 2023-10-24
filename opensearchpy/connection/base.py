@@ -38,7 +38,7 @@ try:
 except ImportError:
     import json
 
-from .. import __versionstr__
+from .._version import __versionstr__
 from ..exceptions import HTTP_EXCEPTIONS, OpenSearchWarning, TransportError
 
 logger = logging.getLogger("opensearch")

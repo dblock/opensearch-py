@@ -24,11 +24,7 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
-try:
-    import collections.abc as collections_abc  # only works on python 3.3+
-except ImportError:
-    import collections as collections_abc
-
+import collections as collections_abc
 from fnmatch import fnmatch
 
 from six import add_metaclass, iteritems

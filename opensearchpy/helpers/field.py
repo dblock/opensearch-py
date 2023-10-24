@@ -25,15 +25,11 @@
 #  under the License.
 
 import base64
+import collections as collections_abc
 import copy
 import ipaddress
-
-try:
-    import collections.abc as collections_abc  # only works on python 3.3+
-except ImportError:
-    import collections as collections_abc
-
 from datetime import date, datetime
+from typing import Any
 
 from dateutil import parser, tz
 from six import integer_types, iteritems, string_types
@@ -47,7 +43,7 @@ from .wrappers import Range
 unicode = type("")
 
 
-def construct_field(name_or_field, **params):
+def construct_field(name_or_field: Any, **params: Any) -> Any:
     # {"type": "text", "analyzer": "snowball"}
     if isinstance(name_or_field, collections_abc.Mapping):
         if params:

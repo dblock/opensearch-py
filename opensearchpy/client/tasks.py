@@ -6,25 +6,6 @@
 #
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
-#
-#  Licensed to Elasticsearch B.V. under one or more contributor
-#  license agreements. See the NOTICE file distributed with
-#  this work for additional information regarding copyright
-#  ownership. Elasticsearch B.V. licenses this file to you under
-#  the Apache License, Version 2.0 (the "License"); you may
-#  not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-# 	http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing,
-#  software distributed under the License is distributed on an
-#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-#  KIND, either express or implied.  See the License for the
-#  specific language governing permissions and limitations
-#  under the License.
-
-
 # ----------------------------------------------------
 # THIS CODE IS GENERATED AND MANUAL EDITS WILL BE LOST.
 #
@@ -35,9 +16,10 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, _make_path, query_params, NamespacedClient
-
 import warnings
+from typing import Any, MutableMapping, Optional
+
+from .utils import SKIP_IN_PATH, NamespacedClient, _make_path, query_params
 
 
 class TasksClient(NamespacedClient):
@@ -50,7 +32,11 @@ class TasksClient(NamespacedClient):
         "timeout",
         "wait_for_completion",
     )
-    def list(self, params=None, headers=None):
+    def list(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a list of tasks.
 
@@ -76,7 +62,12 @@ class TasksClient(NamespacedClient):
         )
 
     @query_params("actions", "nodes", "parent_task_id", "wait_for_completion")
-    def cancel(self, task_id=None, params=None, headers=None):
+    def cancel(
+        self,
+        task_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Cancels a task, if it can be cancelled through an API.
 
@@ -102,7 +93,12 @@ class TasksClient(NamespacedClient):
         )
 
     @query_params("timeout", "wait_for_completion")
-    def get(self, task_id=None, params=None, headers=None):
+    def get(
+        self,
+        task_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about a task.
 

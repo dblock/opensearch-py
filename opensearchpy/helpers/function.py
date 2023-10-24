@@ -24,6 +24,8 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
+from typing import Any
+
 try:
     import collections.abc as collections_abc  # only works on python 3.3+
 except ImportError:
@@ -32,7 +34,7 @@ except ImportError:
 from .utils import DslBase
 
 
-def SF(name_or_sf, **params):
+def SF(name_or_sf: Any, **params: Any) -> Any:
     # {"script_score": {"script": "_score"}, "filter": {}}
     if isinstance(name_or_sf, collections_abc.Mapping):
         if params:

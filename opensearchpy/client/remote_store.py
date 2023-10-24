@@ -1,3 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# The OpenSearch Contributors require contributions made to
+# this file be licensed under the Apache-2.0 license or a
+# compatible open source license.
+#
+# Modifications Copyright OpenSearch Contributors. See
+# GitHub history for details.
 # ----------------------------------------------------
 # THIS CODE IS GENERATED AND MANUAL EDITS WILL BE LOST.
 #
@@ -8,12 +16,19 @@
 # -----------------------------------------------------
 
 
-from .utils import SKIP_IN_PATH, query_params, NamespacedClient
+from typing import Any, MutableMapping, Optional
+
+from .utils import SKIP_IN_PATH, NamespacedClient, query_params
 
 
 class RemoteStoreClient(NamespacedClient):
     @query_params("cluster_manager_timeout", "wait_for_completion")
-    def restore(self, body, params=None, headers=None):
+    def restore(
+        self,
+        body: Any,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Restores from remote store.
 

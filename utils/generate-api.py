@@ -83,29 +83,20 @@ def is_valid_url(url):
 
 
 class Module:
-    def __init__(self, namespace, is_pyi=False):
+    def __init__(self, namespace):
         self.namespace = namespace
-        self.is_pyi = is_pyi
         self._apis = []
         self.parse_orig()
-
-        if not is_pyi:
-            self.pyi = Module(namespace, is_pyi=True)
-            self.pyi.orders = self.orders[:]
 
     def add(self, api):
         self._apis.append(api)
 
     def parse_orig(self):
         self.orders = []
-        self.header = ""
-        if self.is_pyi is True:
-            self.header = "from typing import Any, Collection, MutableMapping, Optional, Tuple, Union\n\n"
+        self.header = "from typing import Any, Collection, MutableMapping, Optional, Tuple, Union\n\n"
 
         namespace_new = "".join(word.capitalize() for word in self.namespace.split("_"))
-        self.header = (
-            self.header + "class " + namespace_new + "Client(NamespacedClient):"
-        )
+        self.header += "class " + namespace_new + "Client(NamespacedClient):"
         if os.path.exists(self.filepath):
             with open(self.filepath) as f:
                 content = f.read()
@@ -120,10 +111,7 @@ class Module:
                     for line in content.split("\n"):
                         header_lines.append(line)
                         if line.startswith("class"):
-                            if (
-                                "security.py" in str(self.filepath)
-                                and not self.filepath.suffix == ".pyi"
-                            ):
+                            if "security.py" in str(self.filepath):
                                 header_lines.append(
                                     "    from ._patch import health_check, update_audit_config"
                                 )
@@ -237,22 +225,15 @@ class Module:
         with open(self.filepath, "w") as f:
             f.write(file_content)
 
-        if not self.is_pyi:
-            self.pyi.dump()
-
     @property
     def filepath(self):
-        return (
-            CODE_ROOT
-            / f"opensearchpy/_async/client/{self.namespace}.py{'i' if self.is_pyi else ''}"
-        )
+        return CODE_ROOT / f"opensearchpy/_async/client/{self.namespace}.py"
 
 
 class API:
-    def __init__(self, namespace, name, definition, is_pyi=False):
+    def __init__(self, namespace, name, definition):
         self.namespace = namespace
         self.name = name
-        self.is_pyi = is_pyi
 
         # overwrite the dict to maintain key order
         definition["params"] = {
@@ -421,13 +402,10 @@ class API:
         return required
 
     def to_python(self):
-        if self.is_pyi:
-            t = jinja_env.get_template("base_pyi")
-        else:
-            try:
-                t = jinja_env.get_template(f"overrides/{self.namespace}/{self.name}")
-            except TemplateNotFound:
-                t = jinja_env.get_template("base")
+        try:
+            t = jinja_env.get_template(f"overrides/{self.namespace}/{self.name}")
+        except TemplateNotFound:
+            t = jinja_env.get_template("base")
 
         return t.render(
             api=self,
@@ -642,7 +620,6 @@ def read_modules():
             modules[namespace] = Module(namespace)
 
         modules[namespace].add(API(namespace, name, api))
-        modules[namespace].pyi.add(API(namespace, name, api, is_pyi=True))
 
     return modules
 
@@ -670,10 +647,9 @@ def dump_modules(modules):
     filepaths = []
     for root, _, filenames in os.walk(CODE_ROOT / "opensearchpy/_async"):
         for filename in filenames:
-            if filename.rpartition(".")[-1] in (
-                "py",
-                "pyi",
-            ) and not filename.startswith("utils.py"):
+            if filename.rpartition(".")[-1] in ("py",) and not filename.startswith(
+                "utils.py"
+            ):
                 filepaths.append(os.path.join(root, filename))
 
     unasync.unasync_files(filepaths, rules)

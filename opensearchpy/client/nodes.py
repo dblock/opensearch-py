@@ -6,25 +6,6 @@
 #
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
-#
-#  Licensed to Elasticsearch B.V. under one or more contributor
-#  license agreements. See the NOTICE file distributed with
-#  this work for additional information regarding copyright
-#  ownership. Elasticsearch B.V. licenses this file to you under
-#  the Apache License, Version 2.0 (the "License"); you may
-#  not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-# 	http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing,
-#  software distributed under the License is distributed on an
-#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-#  KIND, either express or implied.  See the License for the
-#  specific language governing permissions and limitations
-#  under the License.
-
-
 # ----------------------------------------------------
 # THIS CODE IS GENERATED AND MANUAL EDITS WILL BE LOST.
 #
@@ -35,14 +16,20 @@
 # -----------------------------------------------------
 
 
-from .utils import _make_path, query_params, NamespacedClient
+from typing import Any, MutableMapping, Optional
+
+from .utils import NamespacedClient, _make_path, query_params
 
 
 class NodesClient(NamespacedClient):
     @query_params("timeout")
     def reload_secure_settings(
-        self, body=None, node_id=None, params=None, headers=None
-    ):
+        self,
+        body: Optional[Any] = None,
+        node_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Reloads secure settings.
 
@@ -63,7 +50,13 @@ class NodesClient(NamespacedClient):
         )
 
     @query_params("flat_settings", "timeout")
-    def info(self, node_id=None, metric=None, params=None, headers=None):
+    def info(
+        self,
+        node_id: Optional[Any] = None,
+        metric: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about nodes in the cluster.
 
@@ -94,8 +87,13 @@ class NodesClient(NamespacedClient):
         "types",
     )
     def stats(
-        self, node_id=None, metric=None, index_metric=None, params=None, headers=None
-    ):
+        self,
+        node_id: Optional[Any] = None,
+        metric: Optional[Any] = None,
+        index_metric: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns statistical information about nodes in the cluster.
 
@@ -139,7 +137,12 @@ class NodesClient(NamespacedClient):
     @query_params(
         "doc_type", "ignore_idle_threads", "interval", "snapshots", "threads", "timeout"
     )
-    def hot_threads(self, node_id=None, params=None, headers=None):
+    def hot_threads(
+        self,
+        node_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about hot threads on each node in the cluster.
 
@@ -172,7 +175,13 @@ class NodesClient(NamespacedClient):
         )
 
     @query_params("timeout")
-    def usage(self, node_id=None, metric=None, params=None, headers=None):
+    def usage(
+        self,
+        node_id: Optional[Any] = None,
+        metric: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns low-level information about REST actions usage on nodes.
 

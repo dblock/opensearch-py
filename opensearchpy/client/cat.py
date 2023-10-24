@@ -6,25 +6,6 @@
 #
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
-#
-#  Licensed to Elasticsearch B.V. under one or more contributor
-#  license agreements. See the NOTICE file distributed with
-#  this work for additional information regarding copyright
-#  ownership. Elasticsearch B.V. licenses this file to you under
-#  the Apache License, Version 2.0 (the "License"); you may
-#  not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-# 	http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing,
-#  software distributed under the License is distributed on an
-#  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-#  KIND, either express or implied.  See the License for the
-#  specific language governing permissions and limitations
-#  under the License.
-
-
 # ----------------------------------------------------
 # THIS CODE IS GENERATED AND MANUAL EDITS WILL BE LOST.
 #
@@ -35,12 +16,19 @@
 # -----------------------------------------------------
 
 
-from .utils import _make_path, query_params, NamespacedClient
+from typing import Any, MutableMapping, Optional
+
+from .utils import NamespacedClient, _make_path, query_params
 
 
 class CatClient(NamespacedClient):
     @query_params("expand_wildcards", "format", "h", "help", "local", "s", "v")
-    def aliases(self, name=None, params=None, headers=None):
+    def aliases(
+        self,
+        name: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Shows information about currently configured aliases to indices including
         filter and routing infos.
@@ -64,6 +52,20 @@ class CatClient(NamespacedClient):
             "GET", _make_path("_cat", "aliases", name), params=params, headers=headers
         )
 
+    @query_params()
+    def all_pit_segments(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Lists all active point-in-time segments.
+
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/pit_segments/_all", params=params, headers=headers
+        )
+
     @query_params(
         "bytes",
         "cluster_manager_timeout",
@@ -75,7 +77,12 @@ class CatClient(NamespacedClient):
         "s",
         "v",
     )
-    def allocation(self, node_id=None, params=None, headers=None):
+    def allocation(
+        self,
+        node_id: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Provides a snapshot of how many shards are allocated to each data node and how
         much disk space they are using.
@@ -107,8 +114,51 @@ class CatClient(NamespacedClient):
             headers=headers,
         )
 
+    @query_params(
+        "cluster_manager_timeout",
+        "format",
+        "h",
+        "help",
+        "local",
+        "master_timeout",
+        "s",
+        "v",
+    )
+    def cluster_manager(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Returns information about the cluster-manager node.
+
+
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg local: Return local information, do not retrieve the state
+            from cluster-manager node. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/cluster_manager", params=params, headers=headers
+        )
+
     @query_params("format", "h", "help", "s", "v")
-    def count(self, index=None, params=None, headers=None):
+    def count(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Provides quick access to the document count of the entire cluster, or
         individual indices.
@@ -128,8 +178,43 @@ class CatClient(NamespacedClient):
             "GET", _make_path("_cat", "count", index), params=params, headers=headers
         )
 
+    @query_params("bytes", "format", "h", "help", "s", "v")
+    def fielddata(
+        self,
+        fields: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Shows how much heap memory is currently being used by fielddata on every data
+        node in the cluster.
+
+
+        :arg fields: Comma-separated list of fields to return in the
+            output.
+        :arg bytes: The unit in which to display byte values.  Valid
+            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET",
+            _make_path("_cat", "fielddata", fields),
+            params=params,
+            headers=headers,
+        )
+
     @query_params("format", "h", "help", "s", "time", "ts", "v")
-    def health(self, params=None, headers=None):
+    def health(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns a concise representation of the cluster health.
 
@@ -150,7 +235,11 @@ class CatClient(NamespacedClient):
         )
 
     @query_params("help", "s")
-    def help(self, params=None, headers=None):
+    def help(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns help for the Cat APIs.
 
@@ -179,7 +268,12 @@ class CatClient(NamespacedClient):
         "time",
         "v",
     )
-    def indices(self, index=None, params=None, headers=None):
+    def indices(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about indices: number of primaries and replicas, document
         counts, disk size, ...
@@ -231,7 +325,11 @@ class CatClient(NamespacedClient):
         "s",
         "v",
     )
-    def master(self, params=None, headers=None):
+    def master(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about the cluster-manager node.
 
@@ -270,9 +368,13 @@ class CatClient(NamespacedClient):
         "s",
         "v",
     )
-    def cluster_manager(self, params=None, headers=None):
+    def nodeattrs(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
-        Returns information about the cluster-manager node.
+        Returns information about custom node attributes.
 
 
         :arg cluster_manager_timeout: Operation timeout for connection
@@ -291,7 +393,7 @@ class CatClient(NamespacedClient):
         :arg v: Verbose mode. Display column headers. (default: false)
         """
         return self.transport.perform_request(
-            "GET", "/_cat/cluster_manager", params=params, headers=headers
+            "GET", "/_cat/nodeattrs", params=params, headers=headers
         )
 
     @query_params(
@@ -307,7 +409,11 @@ class CatClient(NamespacedClient):
         "time",
         "v",
     )
-    def nodes(self, params=None, headers=None):
+    def nodes(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns basic statistics about performance of cluster nodes.
 
@@ -339,9 +445,110 @@ class CatClient(NamespacedClient):
         )
 
     @query_params(
+        "cluster_manager_timeout",
+        "format",
+        "h",
+        "help",
+        "local",
+        "master_timeout",
+        "s",
+        "time",
+        "v",
+    )
+    def pending_tasks(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Returns a concise representation of the cluster pending tasks.
+
+
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg local: Return local information, do not retrieve the state
+            from cluster-manager node. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg time: The unit in which to display time values.  Valid
+            choices: d, h, m, s, ms, micros, nanos
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/pending_tasks", params=params, headers=headers
+        )
+
+    @query_params()
+    def pit_segments(
+        self,
+        body: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        List segments for one or several PITs.
+
+
+        :arg body:
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/pit_segments", params=params, headers=headers, body=body
+        )
+
+    @query_params(
+        "cluster_manager_timeout",
+        "format",
+        "h",
+        "help",
+        "local",
+        "master_timeout",
+        "s",
+        "v",
+    )
+    def plugins(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Returns information about installed plugins across nodes node.
+
+
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg local: Return local information, do not retrieve the state
+            from cluster-manager node. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/plugins", params=params, headers=headers
+        )
+
+    @query_params(
         "active_only", "bytes", "detailed", "format", "h", "help", "s", "time", "v"
     )
-    def recovery(self, index=None, params=None, headers=None):
+    def recovery(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about index shard recoveries, both on-going completed.
 
@@ -369,6 +576,137 @@ class CatClient(NamespacedClient):
         )
 
     @query_params(
+        "cluster_manager_timeout",
+        "format",
+        "h",
+        "help",
+        "local",
+        "master_timeout",
+        "s",
+        "v",
+    )
+    def repositories(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Returns information about snapshot repositories registered in the cluster.
+
+
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg local: Return local information, do not retrieve the state
+            from cluster-manager node. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET", "/_cat/repositories", params=params, headers=headers
+        )
+
+    @query_params(
+        "active_only",
+        "bytes",
+        "completed_only",
+        "detailed",
+        "format",
+        "h",
+        "help",
+        "s",
+        "shards",
+        "time",
+        "v",
+    )
+    def segment_replication(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Returns information about both on-going and latest completed Segment
+        Replication events.
+
+
+        :arg index: Comma-separated list or wildcard expression of index
+            names to limit the returned information.
+        :arg active_only: If `true`, the response only includes ongoing
+            segment replication events. (default: false)
+        :arg bytes: The unit in which to display byte values.  Valid
+            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
+        :arg completed_only: If `true`, the response only includes
+            latest completed segment replication events. (default: false)
+        :arg detailed: If `true`, the response includes detailed
+            information about segment replications. (default: false)
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg shards: Comma-separated list of shards to display.
+        :arg time: The unit in which to display time values.  Valid
+            choices: d, h, m, s, ms, micros, nanos
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET",
+            _make_path("_cat", "segment_replication", index),
+            params=params,
+            headers=headers,
+        )
+
+    @query_params(
+        "bytes",
+        "cluster_manager_timeout",
+        "format",
+        "h",
+        "help",
+        "master_timeout",
+        "s",
+        "v",
+    )
+    def segments(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
+        """
+        Provides low-level information about the segments in the shards of an index.
+
+
+        :arg index: Comma-separated list of indices to limit the
+            returned information.
+        :arg bytes: The unit in which to display byte values.  Valid
+            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
+        :arg format: A short version of the Accept header, e.g. json,
+            yaml.
+        :arg h: Comma-separated list of column names to display.
+        :arg help: Return help information. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
+        :arg s: Comma-separated list of column names or column aliases
+            to sort by.
+        :arg v: Verbose mode. Display column headers. (default: false)
+        """
+        return self.transport.perform_request(
+            "GET", _make_path("_cat", "segments", index), params=params, headers=headers
+        )
+
+    @query_params(
         "bytes",
         "cluster_manager_timeout",
         "format",
@@ -380,7 +718,12 @@ class CatClient(NamespacedClient):
         "time",
         "v",
     )
-    def shards(self, index=None, params=None, headers=None):
+    def shards(
+        self,
+        index: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Provides a detailed view of shard allocation on nodes.
 
@@ -411,249 +754,6 @@ class CatClient(NamespacedClient):
         )
 
     @query_params(
-        "bytes",
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "master_timeout",
-        "s",
-        "v",
-    )
-    def segments(self, index=None, params=None, headers=None):
-        """
-        Provides low-level information about the segments in the shards of an index.
-
-
-        :arg index: Comma-separated list of indices to limit the
-            returned information.
-        :arg bytes: The unit in which to display byte values.  Valid
-            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET", _make_path("_cat", "segments", index), params=params, headers=headers
-        )
-
-    @query_params(
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "local",
-        "master_timeout",
-        "s",
-        "time",
-        "v",
-    )
-    def pending_tasks(self, params=None, headers=None):
-        """
-        Returns a concise representation of the cluster pending tasks.
-
-
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg local: Return local information, do not retrieve the state
-            from cluster-manager node. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg time: The unit in which to display time values.  Valid
-            choices: d, h, m, s, ms, micros, nanos
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/pending_tasks", params=params, headers=headers
-        )
-
-    @query_params(
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "local",
-        "master_timeout",
-        "s",
-        "size",
-        "v",
-    )
-    def thread_pool(self, thread_pool_patterns=None, params=None, headers=None):
-        """
-        Returns cluster-wide thread pool statistics per node. By default the active,
-        queue and rejected statistics are returned for all thread pools.
-
-
-        :arg thread_pool_patterns: Comma-separated list of regular-
-            expressions to filter the thread pools in the output.
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg local: Return local information, do not retrieve the state
-            from cluster-manager node. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg size: The multiplier in which to display values.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET",
-            _make_path("_cat", "thread_pool", thread_pool_patterns),
-            params=params,
-            headers=headers,
-        )
-
-    @query_params("bytes", "format", "h", "help", "s", "v")
-    def fielddata(self, fields=None, params=None, headers=None):
-        """
-        Shows how much heap memory is currently being used by fielddata on every data
-        node in the cluster.
-
-
-        :arg fields: Comma-separated list of fields to return in the
-            output.
-        :arg bytes: The unit in which to display byte values.  Valid
-            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET",
-            _make_path("_cat", "fielddata", fields),
-            params=params,
-            headers=headers,
-        )
-
-    @query_params(
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "local",
-        "master_timeout",
-        "s",
-        "v",
-    )
-    def plugins(self, params=None, headers=None):
-        """
-        Returns information about installed plugins across nodes node.
-
-
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg local: Return local information, do not retrieve the state
-            from cluster-manager node. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/plugins", params=params, headers=headers
-        )
-
-    @query_params(
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "local",
-        "master_timeout",
-        "s",
-        "v",
-    )
-    def nodeattrs(self, params=None, headers=None):
-        """
-        Returns information about custom node attributes.
-
-
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg local: Return local information, do not retrieve the state
-            from cluster-manager node. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/nodeattrs", params=params, headers=headers
-        )
-
-    @query_params(
-        "cluster_manager_timeout",
-        "format",
-        "h",
-        "help",
-        "local",
-        "master_timeout",
-        "s",
-        "v",
-    )
-    def repositories(self, params=None, headers=None):
-        """
-        Returns information about snapshot repositories registered in the cluster.
-
-
-        :arg cluster_manager_timeout: Operation timeout for connection
-            to cluster-manager node.
-        :arg format: A short version of the Accept header, e.g. json,
-            yaml.
-        :arg h: Comma-separated list of column names to display.
-        :arg help: Return help information. (default: false)
-        :arg local: Return local information, do not retrieve the state
-            from cluster-manager node. (default: false)
-        :arg master_timeout (Deprecated: To promote inclusive language,
-            use 'cluster_manager_timeout' instead): Operation timeout for connection
-            to master node.
-        :arg s: Comma-separated list of column names or column aliases
-            to sort by.
-        :arg v: Verbose mode. Display column headers. (default: false)
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/repositories", params=params, headers=headers
-        )
-
-    @query_params(
         "cluster_manager_timeout",
         "format",
         "h",
@@ -664,7 +764,12 @@ class CatClient(NamespacedClient):
         "time",
         "v",
     )
-    def snapshots(self, repository=None, params=None, headers=None):
+    def snapshots(
+        self,
+        repository: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns all snapshots in a specific repository.
 
@@ -706,7 +811,11 @@ class CatClient(NamespacedClient):
         "time",
         "v",
     )
-    def tasks(self, params=None, headers=None):
+    def tasks(
+        self,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about the tasks currently executing on one or more nodes in
         the cluster.
@@ -746,7 +855,12 @@ class CatClient(NamespacedClient):
         "s",
         "v",
     )
-    def templates(self, name=None, params=None, headers=None):
+    def templates(
+        self,
+        name: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
         Returns information about existing templates.
 
@@ -771,71 +885,49 @@ class CatClient(NamespacedClient):
             "GET", _make_path("_cat", "templates", name), params=params, headers=headers
         )
 
-    @query_params()
-    def all_pit_segments(self, params=None, headers=None):
-        """
-        Lists all active point-in-time segments.
-
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/pit_segments/_all", params=params, headers=headers
-        )
-
-    @query_params()
-    def pit_segments(self, body=None, params=None, headers=None):
-        """
-        List segments for one or several PITs.
-
-
-        :arg body:
-        """
-        return self.transport.perform_request(
-            "GET", "/_cat/pit_segments", params=params, headers=headers, body=body
-        )
-
     @query_params(
-        "active_only",
-        "bytes",
-        "completed_only",
-        "detailed",
+        "cluster_manager_timeout",
         "format",
         "h",
         "help",
+        "local",
+        "master_timeout",
         "s",
-        "shards",
-        "time",
+        "size",
         "v",
     )
-    def segment_replication(self, index=None, params=None, headers=None):
+    def thread_pool(
+        self,
+        thread_pool_patterns: Optional[Any] = None,
+        params: Optional[MutableMapping[str, Any]] = None,
+        headers: Optional[MutableMapping[str, str]] = None,
+    ) -> Any:
         """
-        Returns information about both on-going and latest completed Segment
-        Replication events.
+        Returns cluster-wide thread pool statistics per node. By default the active,
+        queue and rejected statistics are returned for all thread pools.
 
 
-        :arg index: Comma-separated list or wildcard expression of index
-            names to limit the returned information.
-        :arg active_only: If `true`, the response only includes ongoing
-            segment replication events. (default: false)
-        :arg bytes: The unit in which to display byte values.  Valid
-            choices: b, k, kb, m, mb, g, gb, t, tb, p, pb
-        :arg completed_only: If `true`, the response only includes
-            latest completed segment replication events. (default: false)
-        :arg detailed: If `true`, the response includes detailed
-            information about segment replications. (default: false)
+        :arg thread_pool_patterns: Comma-separated list of regular-
+            expressions to filter the thread pools in the output.
+        :arg cluster_manager_timeout: Operation timeout for connection
+            to cluster-manager node.
         :arg format: A short version of the Accept header, e.g. json,
             yaml.
         :arg h: Comma-separated list of column names to display.
         :arg help: Return help information. (default: false)
+        :arg local: Return local information, do not retrieve the state
+            from cluster-manager node. (default: false)
+        :arg master_timeout (Deprecated: To promote inclusive language,
+            use 'cluster_manager_timeout' instead): Operation timeout for connection
+            to master node.
         :arg s: Comma-separated list of column names or column aliases
             to sort by.
-        :arg shards: Comma-separated list of shards to display.
-        :arg time: The unit in which to display time values.  Valid
-            choices: d, h, m, s, ms, micros, nanos
+        :arg size: The multiplier in which to display values.
         :arg v: Verbose mode. Display column headers. (default: false)
         """
         return self.transport.perform_request(
             "GET",
-            _make_path("_cat", "segment_replication", index),
+            _make_path("_cat", "thread_pool", thread_pool_patterns),
             params=params,
             headers=headers,
         )
