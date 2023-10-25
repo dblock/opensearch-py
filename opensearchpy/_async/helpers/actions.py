@@ -57,11 +57,15 @@ from ...helpers.actions import (
 )
 from ...helpers.errors import ScanError
 
+# from opensearchpy._async.client import Any
+# from opensearchpy.serializer import Serializer
+
+
 logger: logging.Logger = logging.getLogger("opensearchpy.helpers")
 
 
 async def _chunk_actions(
-    actions: Any, chunk_size: int, max_chunk_bytes: int, serializer: "Serializer"
+    actions: Any, chunk_size: int, max_chunk_bytes: int, serializer: Any
 ) -> AsyncGenerator[Any, None]:
     """
     Split actions into chunks by number or size, serialize them into strings in
@@ -80,7 +84,7 @@ async def _chunk_actions(
 
 
 async def _process_bulk_chunk(
-    client: "AsyncOpenSearch",
+    client: Any,
     bulk_actions: Any,
     bulk_data: Any,
     raise_on_exception: bool = True,
@@ -149,7 +153,7 @@ async def azip(
 
 
 async def async_streaming_bulk(
-    client: "AsyncOpenSearch",
+    client: Any,
     actions: Union[Iterable[Any], AsyncIterable[Any]],
     chunk_size: int = 500,
     max_chunk_bytes: int = 100 * 1024 * 1024,
@@ -179,7 +183,7 @@ async def async_streaming_bulk(
     every subsequent rejection for the same chunk, for double the time every
     time up to ``max_backoff`` seconds.
 
-    :arg client: instance of :class:`~opensearchpy.AsyncOpenSearch` to use
+    :arg client: instance of :class:`~opensearchpy.Any` to use
     :arg actions: iterable or async iterable containing the actions to be executed
     :arg chunk_size: number of docs in one chunk sent to client (default: 500)
     :arg max_chunk_bytes: the maximum size of the request in bytes (default: 100MB)
@@ -260,7 +264,7 @@ async def async_streaming_bulk(
 
 
 async def async_bulk(
-    client: "AsyncOpenSearch",
+    client: Any,
     actions: Union[Iterable[Any], AsyncIterable[Any]],
     stats_only: bool = False,
     ignore_status: Optional[Union[int, Collection[int]]] = (),
@@ -268,7 +272,7 @@ async def async_bulk(
     **kwargs: Any
 ) -> Tuple[int, Union[int, List[Any]]]:
     """
-    Helper for the :meth:`~opensearchpy.AsyncOpenSearch.bulk` api that provides
+    Helper for the :meth:`~opensearchpy.Any.bulk` api that provides
     a more human friendly interface - it consumes an iterator of actions and
     sends them to opensearch in chunks. It returns a tuple with summary
     information - number of successfully executed actions and either list of
@@ -284,7 +288,7 @@ async def async_bulk(
     just return the errors and not store them in memory.
 
 
-    :arg client: instance of :class:`~opensearchpy.AsyncOpenSearch` to use
+    :arg client: instance of :class:`~opensearchpy.Any` to use
     :arg actions: iterator containing the actions
     :arg stats_only: if `True` only report number of successful/failed
         operations instead of just number of successful and a list of error responses
@@ -317,7 +321,7 @@ async def async_bulk(
 
 
 async def async_scan(
-    client: "AsyncOpenSearch",
+    client: Any,
     query: Optional[Any] = None,
     scroll: str = "5m",
     raise_on_error: bool = True,
@@ -330,7 +334,7 @@ async def async_scan(
 ) -> AsyncGenerator[dict[str, Any], None]:
     """
     Simple abstraction on top of the
-    :meth:`~opensearchpy.AsyncOpenSearch.scroll` api - a simple iterator that
+    :meth:`~opensearchpy.Any.scroll` api - a simple iterator that
     yields all hits as returned by underlining scroll requests.
 
     By default scan does not return results in any pre-determined order. To
@@ -339,8 +343,8 @@ async def async_scan(
     may be an expensive operation and will negate the performance benefits of
     using ``scan``.
 
-    :arg client: instance of :class:`~opensearchpy.AsyncOpenSearch` to use
-    :arg query: body for the :meth:`~opensearchpy.AsyncOpenSearch.search` api
+    :arg client: instance of :class:`~opensearchpy.Any` to use
+    :arg query: body for the :meth:`~opensearchpy.Any.search` api
     :arg scroll: Specify how long a consistent view of the index should be
         maintained for scrolled search
     :arg raise_on_error: raises an exception (``ScanError``) if an error is
@@ -355,10 +359,10 @@ async def async_scan(
         scroll API at the end of the method on completion or error, defaults
         to true.
     :arg scroll_kwargs: additional kwargs to be passed to
-        :meth:`~opensearchpy.AsyncOpenSearch.scroll`
+        :meth:`~opensearchpy.Any.scroll`
 
     Any additional keyword arguments will be passed to the initial
-    :meth:`~opensearchpy.AsyncOpenSearch.search` call::
+    :meth:`~opensearchpy.Any.search` call::
 
         async_scan(client,
             query={"query": {"match": {"title": "python"}}},
@@ -437,11 +441,11 @@ async def async_scan(
 
 
 async def async_reindex(
-    client: "AsyncOpenSearch",
+    client: Any,
     source_index: Union[str, Collection[str]],
     target_index: str,
     query: Any = None,
-    target_client: Optional["AsyncOpenSearch"] = None,
+    target_client: Optional[Any] = None,
     chunk_size: int = 500,
     scroll: str = "5m",
     scan_kwargs: Optional[Mapping[str, Any]] = {},
@@ -452,7 +456,7 @@ async def async_reindex(
     to another, potentially (if `target_client` is specified) on a different cluster.
     If you don't specify the query you will reindex all the documents.
 
-    Since ``2.3`` a :meth:`~opensearchpy.AsyncOpenSearch.reindex` api is
+    Since ``2.3`` a :meth:`~opensearchpy.Any.reindex` api is
     available as part of opensearch itself. It is recommended to use the api
     instead of this helper wherever possible. The helper is here mostly for
     backwards compatibility and for situations where more flexibility is
@@ -462,11 +466,11 @@ async def async_reindex(
 
         This helper doesn't transfer mappings, just the data.
 
-    :arg client: instance of :class:`~opensearchpy.AsyncOpenSearch` to use (for
+    :arg client: instance of :class:`~opensearchpy.Any` to use (for
         read if `target_client` is specified as well)
     :arg source_index: index (or list of indices) to read documents from
     :arg target_index: name of the index in the target cluster to populate
-    :arg query: body for the :meth:`~opensearchpy.AsyncOpenSearch.search` api
+    :arg query: body for the :meth:`~opensearchpy.Any.search` api
     :arg target_client: optional, is specified will be used for writing (thus
         enabling reindex between clusters)
     :arg chunk_size: number of docs in one chunk sent to client (default: 500)

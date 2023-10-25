@@ -26,11 +26,7 @@
 
 from __future__ import unicode_literals
 
-try:
-    import collections.abc as collections_abc  # only works on python 3.3+
-except ImportError:
-    import collections as collections_abc
-
+import collections.abc as collections_abc
 from copy import copy
 from typing import Any, Dict, Optional
 

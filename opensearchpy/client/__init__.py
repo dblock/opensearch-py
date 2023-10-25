@@ -39,12 +39,11 @@
 from __future__ import unicode_literals
 
 import logging
-from typing import Type, Any, MutableMapping, Optional
-
-from .client import Client
+from typing import Any, MutableMapping, Optional, Type
 
 from ..transport import Transport, TransportError
 from .cat import CatClient
+from .client import Client
 from .cluster import ClusterClient
 from .dangling_indices import DanglingIndicesClient
 from .features import FeaturesClient
@@ -56,7 +55,7 @@ from .remote import RemoteClient
 from .security import SecurityClient
 from .snapshot import SnapshotClient
 from .tasks import TasksClient
-from .utils import SKIP_IN_PATH, _bulk_body, _make_path, _normalize_hosts, query_params
+from .utils import SKIP_IN_PATH, _bulk_body, _make_path, query_params
 
 logger = logging.getLogger("opensearch")
 
@@ -192,7 +191,12 @@ class OpenSearch(Client):
         list_all_point_in_time,
     )
 
-    def __init__(self, hosts: Optional[str]=None, transport_class: Type[Transport]=Transport, **kwargs) -> None:
+    def __init__(
+        self,
+        hosts: Optional[str] = None,
+        transport_class: Type[Transport] = Transport,
+        **kwargs
+    ) -> None:
         """
         :arg hosts: list of nodes, or a single node, we should connect to.
             Node should be a dictionary ({"host": "localhost", "port": 9200}),

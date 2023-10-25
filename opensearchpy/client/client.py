@@ -9,6 +9,7 @@
 # GitHub history for details.
 
 from typing import Optional, Type
+
 from opensearchpy.client.utils import _normalize_hosts
 from opensearchpy.transport import Transport
 
@@ -18,7 +19,12 @@ class Client(object):
     A generic OpenSearch client.
     """
 
-    def __init__(self, hosts: Optional[str]=None, transport_class: Type[Transport]=Transport, **kwargs) -> None:
+    def __init__(
+        self,
+        hosts: Optional[str] = None,
+        transport_class: Type[Transport] = Transport,
+        **kwargs
+    ) -> None:
         """
         :arg hosts: list of nodes, or a single node, we should connect to.
             Node should be a dictionary ({"host": "localhost", "port": 9200}),

@@ -10,10 +10,9 @@
 import warnings
 from typing import Any
 
-from .client import Client
-
 from ..plugins.alerting import AlertingClient
 from ..plugins.index_management import IndexManagementClient
+from .client import Client
 from .utils import NamespacedClient
 
 

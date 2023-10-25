@@ -24,19 +24,15 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
-from .utils import DslBase
-
-try:
-    import collections.abc as collections_abc  # only works on python 3.3+
-except ImportError:
-    import collections as collections_abc
-
+import collections.abc as collections_abc
 from itertools import chain
 
 from six import iteritems, itervalues
 
 from opensearchpy.connection.connections import get_connection
 from opensearchpy.helpers.field import Nested, Text, construct_field
+
+from .utils import DslBase
 
 META_FIELDS = frozenset(
     (

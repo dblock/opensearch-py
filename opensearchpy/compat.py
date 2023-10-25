@@ -25,6 +25,7 @@
 #  under the License.
 
 
+from collections.abc import Mapping
 from queue import Queue
 from typing import Tuple, Type, Union
 from urllib.parse import quote, quote_plus, unquote, urlencode, urlparse
@@ -43,12 +44,6 @@ def to_bytes(x: Union[str, bytes], encoding: str = "ascii") -> bytes:
     if not isinstance(x, bytes):
         return x.encode(encoding)
     return x
-
-
-try:
-    from collections.abc import Mapping
-except ImportError:
-    from collections import Mapping
 
 
 try:

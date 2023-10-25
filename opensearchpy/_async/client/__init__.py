@@ -41,10 +41,9 @@ from __future__ import unicode_literals
 import logging
 from typing import Any, MutableMapping, Optional
 
-from .client import Client
-
 from ..transport import AsyncTransport, TransportError
 from .cat import CatClient
+from .client import Client
 from .cluster import ClusterClient
 from .dangling_indices import DanglingIndicesClient
 from .features import FeaturesClient

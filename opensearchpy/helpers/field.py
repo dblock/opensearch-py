@@ -25,7 +25,7 @@
 #  under the License.
 
 import base64
-import collections as collections_abc
+import collections.abc as collections_abc
 import copy
 import ipaddress
 from datetime import date, datetime

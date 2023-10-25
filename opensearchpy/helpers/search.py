@@ -24,14 +24,8 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
+import collections.abc as collections_abc
 import copy
-
-from .aggs import A, AggBase
-
-try:
-    import collections.abc as collections_abc  # only works on python 3.3+
-except ImportError:
-    import collections as collections_abc
 
 from six import iteritems, string_types
 
@@ -41,6 +35,7 @@ from opensearchpy.helpers import scan
 
 from ..exceptions import IllegalOperation
 from ..helpers.query import Bool, Q
+from .aggs import A, AggBase
 from .response import Hit, Response
 from .utils import AttrDict, DslBase, recursive_to_dict
 
