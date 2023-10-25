@@ -32,6 +32,7 @@ except ImportError:
     import collections as collections_abc
 
 from copy import copy
+from typing import Any, Dict, Optional
 
 from six import add_metaclass, iteritems
 from six.moves import map
@@ -229,7 +230,7 @@ class DslMeta(type):
 
     _types = {}
 
-    def __init__(cls, name, bases, attrs):
+    def __init__(cls, name: str, bases: Any, attrs: Dict[str, Any]) -> None:
         super(DslMeta, cls).__init__(name, bases, attrs)
         # skip for DslBase
         if not hasattr(cls, "_type_shortcut"):
@@ -282,7 +283,7 @@ class DslBase(object):
                 "DSL class `{}` does not exist in {}.".format(name, cls._type_name)
             )
 
-    def __init__(self, _expand__to_dot=EXPAND__TO_DOT, **params):
+    def __init__(self, _expand__to_dot: bool = EXPAND__TO_DOT, **params) -> None:
         self._params = {}
         for pname, pvalue in iteritems(params):
             if "__" in pname and _expand__to_dot:
@@ -307,7 +308,7 @@ class DslBase(object):
     def __ne__(self, other):
         return not self == other
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, name: str, value: Optional[bool]) -> None:
         if name.startswith("_"):
             return super(DslBase, self).__setattr__(name, value)
         return self._setattr(name, value)

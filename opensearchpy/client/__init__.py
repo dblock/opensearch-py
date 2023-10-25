@@ -39,7 +39,9 @@
 from __future__ import unicode_literals
 
 import logging
-from typing import Any, MutableMapping, Optional
+from typing import Type, Any, MutableMapping, Optional
+
+from .client import Client
 
 from ..transport import Transport, TransportError
 from .cat import CatClient
@@ -59,7 +61,7 @@ from .utils import SKIP_IN_PATH, _bulk_body, _make_path, _normalize_hosts, query
 logger = logging.getLogger("opensearch")
 
 
-class OpenSearch(object):
+class OpenSearch(Client):
     """
     OpenSearch client. Provides a straightforward mapping from
     Python to OpenSearch REST endpoints.
@@ -190,7 +192,7 @@ class OpenSearch(object):
         list_all_point_in_time,
     )
 
-    def __init__(self, hosts=None, transport_class=Transport, **kwargs):
+    def __init__(self, hosts: Optional[str]=None, transport_class: Type[Transport]=Transport, **kwargs) -> None:
         """
         :arg hosts: list of nodes, or a single node, we should connect to.
             Node should be a dictionary ({"host": "localhost", "port": 9200}),
@@ -205,7 +207,7 @@ class OpenSearch(object):
             :class:`~opensearchpy.Transport` class and, subsequently, to the
             :class:`~opensearchpy.Connection` instances.
         """
-        self.transport = transport_class(_normalize_hosts(hosts), **kwargs)
+        super().__init__(hosts, transport_class, **kwargs)
 
         # namespaced clients for compatibility with API names
         self.cat = CatClient(self)

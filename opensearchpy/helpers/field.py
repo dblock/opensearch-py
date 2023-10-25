@@ -82,7 +82,9 @@ class Field(DslBase):
     name = None
     _coerce = False
 
-    def __init__(self, multi=False, required=False, *args, **kwargs):
+    def __init__(
+        self, multi: bool = False, required: bool = False, *args, **kwargs
+    ) -> None:
         """
         :arg bool multi: specifies whether field can contain array of values
         :arg bool required: specifies whether field is required
@@ -259,7 +261,7 @@ class Date(Field):
     name = "date"
     _coerce = True
 
-    def __init__(self, default_timezone=None, *args, **kwargs):
+    def __init__(self, default_timezone: None = None, *args, **kwargs) -> None:
         """
         :arg default_timezone: timezone that will be automatically used for tz-naive values
             May be instance of `datetime.tzinfo` or string containing TZ offset

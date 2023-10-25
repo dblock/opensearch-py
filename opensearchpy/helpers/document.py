@@ -24,8 +24,11 @@
 #  specific language governing permissions and limitations
 #  under the License.
 
+from __future__ import annotations
+
 import collections as collections_abc
 from fnmatch import fnmatch
+from typing import Callable, Dict, Tuple, Type, Union
 
 from six import add_metaclass, iteritems
 
@@ -46,7 +49,12 @@ class MetaField(object):
 
 
 class DocumentMeta(type):
-    def __new__(cls, name, bases, attrs):
+    def __new__(
+        cls: Union[Type[DocumentMeta], Type[IndexMeta]],
+        name: str,
+        bases: Tuple[Type[ObjectBase]],
+        attrs: Dict[str, Union[str, classmethod, Callable]],
+    ) -> Union[Type[Document], Type[InnerDoc]]:
         # DocumentMeta filters attrs in place
         attrs["_doc_type"] = DocumentOptions(name, bases, attrs)
         return super(DocumentMeta, cls).__new__(cls, name, bases, attrs)
@@ -57,7 +65,12 @@ class IndexMeta(DocumentMeta):
     # class, only user defined subclasses should have an _index attr
     _document_initialized = False
 
-    def __new__(cls, name, bases, attrs):
+    def __new__(
+        cls: Type[IndexMeta],
+        name: str,
+        bases: Tuple[Type[ObjectBase]],
+        attrs: Dict[str, Union[str, classmethod, Callable]],
+    ) -> Type[Document]:
         new_cls = super(IndexMeta, cls).__new__(cls, name, bases, attrs)
         if cls._document_initialized:
             index_opts = attrs.pop("Index", None)
@@ -86,7 +99,12 @@ class IndexMeta(DocumentMeta):
 
 
 class DocumentOptions(object):
-    def __init__(self, name, bases, attrs):
+    def __init__(
+        self,
+        name: str,
+        bases: Tuple[Type[ObjectBase]],
+        attrs: Dict[str, Union[str, classmethod, Callable]],
+    ) -> None:
         meta = attrs.pop("Meta", None)
 
         # create the mapping instance

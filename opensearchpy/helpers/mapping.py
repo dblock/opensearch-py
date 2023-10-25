@@ -55,7 +55,7 @@ class Properties(DslBase):
     name = "properties"
     _param_defs = {"properties": {"type": "field", "hash": True}}
 
-    def __init__(self):
+    def __init__(self) -> None:
         super(Properties, self).__init__()
 
     def __repr__(self):
@@ -102,7 +102,7 @@ class Properties(DslBase):
 
 
 class Mapping(object):
-    def __init__(self):
+    def __init__(self) -> None:
         self.properties = Properties()
         self._meta = {}
 

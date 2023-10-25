@@ -10,6 +10,8 @@
 import warnings
 from typing import Any
 
+from .client import Client
+
 from ..plugins.alerting import AlertingClient
 from ..plugins.index_management import IndexManagementClient
 from .utils import NamespacedClient
@@ -19,7 +21,7 @@ class PluginsClient(NamespacedClient):
     alerting: Any
     index_management: Any
 
-    def __init__(self, client: "OpenSearch") -> None:
+    def __init__(self, client: Client) -> None:
         super(PluginsClient, self).__init__(client)
         # self.query_workbench = QueryWorkbenchClient(client)
         # self.reporting = ReportingClient(client)

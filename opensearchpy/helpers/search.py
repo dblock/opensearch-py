@@ -101,7 +101,7 @@ class ProxyDescriptor(object):
 
     """
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         self._attr_name = "_%s_proxy" % name
 
     def __get__(self, instance, owner):

@@ -41,6 +41,8 @@ from __future__ import unicode_literals
 import logging
 from typing import Any, MutableMapping, Optional
 
+from .client import Client
+
 from ..transport import AsyncTransport, TransportError
 from .cat import CatClient
 from .cluster import ClusterClient
@@ -54,12 +56,12 @@ from .remote import RemoteClient
 from .security import SecurityClient
 from .snapshot import SnapshotClient
 from .tasks import TasksClient
-from .utils import SKIP_IN_PATH, _bulk_body, _make_path, _normalize_hosts, query_params
+from .utils import SKIP_IN_PATH, _bulk_body, _make_path, query_params
 
 logger = logging.getLogger("opensearch")
 
 
-class AsyncOpenSearch(object):
+class AsyncOpenSearch(Client):
     """
     OpenSearch client. Provides a straightforward mapping from
     Python to OpenSearch REST endpoints.
@@ -205,7 +207,7 @@ class AsyncOpenSearch(object):
             :class:`~opensearchpy.Transport` class and, subsequently, to the
             :class:`~opensearchpy.Connection` instances.
         """
-        self.transport = transport_class(_normalize_hosts(hosts), **kwargs)
+        super().__init__(hosts, transport_class, **kwargs)
 
         # namespaced clients for compatibility with API names
         self.cat = CatClient(self)

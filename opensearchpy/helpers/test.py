@@ -32,6 +32,7 @@ import time
 from typing import Any, Tuple
 from unittest import SkipTest, TestCase
 
+import opensearchpy.client
 from opensearchpy import OpenSearch
 from opensearchpy.exceptions import ConnectionError
 
@@ -101,7 +102,7 @@ def _get_version(version_string: str) -> Tuple[int, ...]:
     return tuple(int(v) if v.isdigit() else 999 for v in version)
 
 
-def opensearch_version(client):
+def opensearch_version(client: opensearchpy.client.OpenSearch) -> Tuple[int, int, int]:
     return _get_version(client.info()["version"]["number"])
 
 
