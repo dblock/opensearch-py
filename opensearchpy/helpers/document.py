@@ -32,6 +32,7 @@ from typing import Callable, Dict, Tuple, Type, Union
 
 from six import add_metaclass, iteritems
 
+from opensearchpy.connection.base import Connection
 from opensearchpy.connection.connections import get_connection
 from opensearchpy.exceptions import NotFoundError, RequestError
 
@@ -162,7 +163,7 @@ class Document(ObjectBase):
         return using or cls._index._using
 
     @classmethod
-    def _get_connection(cls, using=None):
+    def _get_connection(cls, using=None) -> Connection:
         return get_connection(cls._get_using(using))
 
     @classmethod

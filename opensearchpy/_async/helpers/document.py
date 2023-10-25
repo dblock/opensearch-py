@@ -12,6 +12,7 @@ from fnmatch import fnmatch
 
 from six import add_metaclass
 
+from opensearchpy._async.client import AsyncOpenSearch
 from opensearchpy._async.helpers.index import AsyncIndex
 from opensearchpy._async.helpers.search import AsyncSearch
 from opensearchpy.connection.async_connections import get_connection
@@ -73,11 +74,11 @@ class AsyncDocument(ObjectBase):
         return fnmatch(hit.get("_index", ""), cls._index._name)
 
     @classmethod
-    def _get_using(cls, using=None):
+    def _get_using(cls, using: AsyncOpenSearch = None):
         return using or cls._index._using
 
     @classmethod
-    async def _get_connection(cls, using=None):
+    async def _get_connection(cls, using: AsyncOpenSearch = None):
         return await get_connection(cls._get_using(using))
 
     @classmethod
@@ -85,7 +86,7 @@ class AsyncDocument(ObjectBase):
         return index or cls._index._name
 
     @classmethod
-    async def init(cls, index=None, using=None):
+    async def init(cls, index=None, using: AsyncOpenSearch = None):
         """
         Create the index and populate the mappings in opensearch.
         """
@@ -116,7 +117,7 @@ class AsyncDocument(ObjectBase):
         )
 
     @classmethod
-    def search(cls, using=None, index=None):
+    def search(cls, using: AsyncOpenSearch = None, index=None):
         """
         Create an :class:`~opensearchpy.AsyncSearch` instance that will search
         over this ``Document``.
@@ -126,7 +127,7 @@ class AsyncDocument(ObjectBase):
         )
 
     @classmethod
-    async def get(cls, id, using=None, index=None, **kwargs):
+    async def get(cls, id, using: AsyncOpenSearch = None, index=None, **kwargs):
         """
         Retrieve a single document from opensearch using its ``id``.
 
@@ -145,7 +146,7 @@ class AsyncDocument(ObjectBase):
         return cls.from_opensearch(doc)
 
     @classmethod
-    async def exists(cls, id, using=None, index=None, **kwargs):
+    async def exists(cls, id, using: AsyncOpenSearch = None, index=None, **kwargs):
         """
         check if exists a single document from opensearch using its ``id``.
 
@@ -162,7 +163,13 @@ class AsyncDocument(ObjectBase):
 
     @classmethod
     async def mget(
-        cls, docs, using=None, index=None, raise_on_error=True, missing="none", **kwargs
+        cls,
+        docs,
+        using: AsyncOpenSearch = None,
+        index=None,
+        raise_on_error=True,
+        missing="none",
+        **kwargs
     ):
         r"""
         Retrieve multiple document by their ``id``\s. Returns a list of instances
@@ -225,7 +232,7 @@ class AsyncDocument(ObjectBase):
             raise NotFoundError(404, message, {"docs": missing_docs})
         return objs
 
-    async def delete(self, using=None, index=None, **kwargs):
+    async def delete(self, using: AsyncOpenSearch = None, index=None, **kwargs):
         """
         Delete the instance in opensearch.
 
@@ -275,7 +282,7 @@ class AsyncDocument(ObjectBase):
 
     async def update(
         self,
-        using=None,
+        using: AsyncOpenSearch = None,
         index=None,
         detect_noop=True,
         doc_as_upsert=False,
@@ -380,7 +387,7 @@ class AsyncDocument(ObjectBase):
 
     async def save(
         self,
-        using=None,
+        using: AsyncOpenSearch = None,
         index=None,
         validate=True,
         skip_empty=True,

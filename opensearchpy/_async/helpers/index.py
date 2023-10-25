@@ -7,6 +7,7 @@
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
 
+from opensearchpy._async.client import AsyncOpenSearch
 from opensearchpy._async.helpers.mapping import AsyncMapping
 from opensearchpy._async.helpers.search import AsyncSearch
 from opensearchpy._async.helpers.update_by_query import AsyncUpdateByQuery
@@ -122,7 +123,7 @@ class AsyncIndex(object):
             i._mapping = self._mapping._clone()
         return i
 
-    async def _get_connection(self, using=None):
+    async def _get_connection(self, using=None) -> AsyncOpenSearch:
         if self._name is None:
             raise ValueError("You cannot perform API calls on the default index.")
         return await get_connection(using or self._using)

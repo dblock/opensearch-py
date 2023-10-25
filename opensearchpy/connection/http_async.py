@@ -149,7 +149,7 @@ class AsyncHttpConnection(AIOHttpConnection):
 
     async def perform_request(
         self, method, url, params=None, body=None, timeout=None, ignore=(), headers=None
-    ):
+    ) -> Any:
         if self.session is None:
             await self._create_aiohttp_session()
         assert self.session is not None

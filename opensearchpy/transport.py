@@ -27,7 +27,7 @@
 
 import time
 from itertools import chain
-from typing import Any, Callable, Collection, Dict, List, Mapping, Optional, Type, Union
+from typing import Any, Callable, Collection, Dict, List, Mapping, Optional, Type
 
 from .connection import Connection, Urllib3HttpConnection
 from .connection_pool import ConnectionPool, DummyConnectionPool, EmptyConnectionPool
@@ -378,7 +378,7 @@ class Transport(object):
         headers: Optional[Mapping[str, str]] = None,
         params: Optional[Mapping[str, Any]] = None,
         body: Optional[Any] = None,
-    ) -> Union[bool, Any]:
+    ) -> Any:
         """
         Perform the actual request. Retrieve a connection from the connection
         pool, pass all the information to its perform_request method and

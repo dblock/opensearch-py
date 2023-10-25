@@ -28,7 +28,7 @@ from __future__ import unicode_literals
 
 import collections.abc as collections_abc
 from copy import copy
-from typing import Any, Dict, Optional
+from typing import Any, Callable, Dict, Optional
 
 from six import add_metaclass, iteritems
 from six.moves import map
@@ -58,7 +58,7 @@ META_FIELDS = frozenset(
 ).union(DOC_META_FIELDS)
 
 
-def _wrap(val, obj_wrapper=None):
+def _wrap(val, obj_wrapper: Optional[Callable] = None) -> Any:
     if isinstance(val, collections_abc.Mapping):
         return AttrDict(val) if obj_wrapper is None else obj_wrapper(val)
     if isinstance(val, list):
@@ -67,26 +67,26 @@ def _wrap(val, obj_wrapper=None):
 
 
 class AttrList(object):
-    def __init__(self, p, obj_wrapper=None):
+    def __init__(self, p: Any, obj_wrapper: Optional[Callable] = None):
         # make iterables into lists
         if not isinstance(p, list):
             p = list(p)
         self._l_ = p
         self._obj_wrapper = obj_wrapper
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return repr(self._l_)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if isinstance(other, AttrList):
             return other._l_ == self._l_
         # make sure we still equal to a dict with the same data
         return other == self._l_
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return not self == other
 
-    def __getitem__(self, k):
+    def __getitem__(self, k: Any) -> Any:
         p = self._l_[k]
         if isinstance(k, slice):
             return AttrList(p, obj_wrapper=self._obj_wrapper)

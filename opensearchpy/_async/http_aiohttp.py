@@ -34,7 +34,7 @@ import warnings
 # This is used to detect if a user is passing in a value
 # for SSL kwargs if also using an SSLContext.
 from asyncio import AbstractEventLoop
-from typing import Any, Collection, Mapping, Optional, Tuple, Union
+from typing import Any, Collection, Mapping, Optional, Union
 
 import urllib3  # type: ignore
 
@@ -65,7 +65,7 @@ class AsyncConnection(Connection):
         timeout: Optional[Union[int, float]] = None,
         ignore: Collection[int] = (),
         headers: Optional[Mapping[str, str]] = None,
-    ) -> Tuple[int, Mapping[str, str], str]:
+    ) -> Any:
         raise NotImplementedError()
 
     async def close(self) -> None:
@@ -230,7 +230,7 @@ class AIOHttpConnection(AsyncConnection):
 
     async def perform_request(
         self, method, url, params=None, body=None, timeout=None, ignore=(), headers=None
-    ):
+    ) -> Any:
         if self.session is None:
             await self._create_aiohttp_session()
         assert self.session is not None

@@ -30,6 +30,7 @@ from __future__ import unicode_literals
 
 import asyncio
 import json
+from typing import Any
 
 import pytest
 from mock import patch
@@ -52,7 +53,7 @@ class DummyConnection(Connection):
         self.closed = False
         super(DummyConnection, self).__init__(**kwargs)
 
-    async def perform_request(self, *args, **kwargs):
+    async def perform_request(self, *args, **kwargs) -> Any:
         if self.closed:
             raise RuntimeError("This connection is closed")
         if self.delay:

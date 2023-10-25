@@ -34,12 +34,12 @@ class BulkIndexError(OpenSearchException):
     @property
     def errors(self) -> List[Any]:
         """List of errors from execution of the last chunk."""
-        return self.args[1]
+        return self.args[1]  # type: ignore
 
 
 class ScanError(OpenSearchException):
     scroll_id: str
 
     def __init__(self, scroll_id: str, *args: Any, **kwargs: Any) -> None:
-        super(ScanError, self).__init__(*args, **kwargs)  # type: ignore
+        super(ScanError, self).__init__(*args, **kwargs)
         self.scroll_id = scroll_id

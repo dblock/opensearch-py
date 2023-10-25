@@ -25,7 +25,7 @@
 #  under the License.
 
 
-from typing import Any, Dict, Union
+from typing import Any, Dict, Type, Union
 
 __all__ = [
     "ImproperlyConfigured",
@@ -82,12 +82,12 @@ class TransportError(OpenSearchException):
         The HTTP status code of the response that precipitated the error or
         ``'N/A'`` if not applicable.
         """
-        return self.args[0]
+        return self.args[0]  # type: ignore
 
     @property
     def error(self) -> str:
         """A string error message."""
-        return self.args[1]
+        return self.args[1]  # type: ignore
 
     @property
     def info(self) -> Union[Dict[str, Any], Exception, Any]:
@@ -100,9 +100,10 @@ class TransportError(OpenSearchException):
     def __str__(self) -> str:
         cause = ""
         try:
-            if self.info and "error" in self.info:
-                if isinstance(self.info["error"], dict):
-                    root_cause = self.info["error"]["root_cause"][0]
+            if self.info and isinstance(self.info, dict) and "error" in self.info:
+                error = self.info["error"]
+                if isinstance(error, dict):
+                    root_cause = error["root_cause"][0]
                     cause = ", ".join(
                         filter(
                             None,
@@ -200,7 +201,7 @@ OpenSearchDeprecationWarning = OpenSearchWarning
 
 
 # more generic mappings from status_code to python exceptions
-HTTP_EXCEPTIONS: Dict[int, OpenSearchException] = {
+HTTP_EXCEPTIONS: Dict[int, Type[OpenSearchException]] = {
     400: RequestError,
     401: AuthenticationException,
     403: AuthorizationException,

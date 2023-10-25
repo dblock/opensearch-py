@@ -7,15 +7,10 @@
 # Modifications Copyright OpenSearch Contributors. See
 # GitHub history for details.
 
-import sys
 from typing import Any, Callable, Dict
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import requests
-
-PY3 = sys.version_info[0] == 3
-
-if PY3:
-    from urllib.parse import parse_qs, urlencode, urlparse
 
 
 class AWSV4Signer:

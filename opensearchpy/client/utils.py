@@ -31,6 +31,10 @@ import base64
 import weakref
 from datetime import date, datetime
 from functools import wraps
+from typing import Any, Callable, Sequence
+
+from opensearchpy.serializer import Serializer
+from opensearchpy.transport import Transport
 
 from ..compat import quote, string_types, to_bytes, to_str, unquote, urlparse
 
@@ -38,7 +42,7 @@ from ..compat import quote, string_types, to_bytes, to_str, unquote, urlparse
 SKIP_IN_PATH = (None, "", b"", [], ())
 
 
-def _normalize_hosts(hosts):
+def _normalize_hosts(hosts: Any) -> Sequence[str]:
     """
     Helper function to transform hosts argument to
     :class:`~opensearchpy.OpenSearch` to a list of dicts.
@@ -83,7 +87,7 @@ def _normalize_hosts(hosts):
     return out
 
 
-def _escape(value):
+def _escape(value: Any) -> str:
     """
     Escape a single value of a URL string or a query parameter. If it is a list
     or tuple, turn it into a comma-separated string first.
@@ -113,7 +117,7 @@ def _escape(value):
     return str(value)
 
 
-def _make_path(*parts):
+def _make_path(*parts: Any) -> str:
     """
     Create a URL string from parts, omit all `None` values and empty strings.
     Convert lists and tuples to comma separated values.
@@ -131,7 +135,7 @@ def _make_path(*parts):
 GLOBAL_PARAMS = ("pretty", "human", "error_trace", "format", "filter_path")
 
 
-def query_params(*opensearch_query_params):
+def query_params(*opensearch_query_params: Any) -> Callable:
     """
     Decorator that pops all accepted parameters from method's kwargs and puts
     them in the params argument.
@@ -181,7 +185,7 @@ def query_params(*opensearch_query_params):
     return _wrapper
 
 
-def _bulk_body(serializer, body):
+def _bulk_body(serializer: Serializer, body: str) -> str:
     # if not passed in a string, serialize items and join by newline
     if not isinstance(body, string_types):
         body = "\n".join(map(serializer.dumps, body))
@@ -196,7 +200,7 @@ def _bulk_body(serializer, body):
     return body
 
 
-def _base64_auth_header(auth_value):
+def _base64_auth_header(auth_value: Any) -> str:
     """Takes either a 2-tuple or a base64-encoded string
     and returns a base64-encoded string to be used
     as an HTTP authorization header.
@@ -211,13 +215,13 @@ class NamespacedClient(object):
         self.client = client
 
     @property
-    def transport(self):
+    def transport(self) -> Transport:
         return self.client.transport
 
 
 class AddonClient(NamespacedClient):
     @classmethod
-    def infect_client(cls, client):
+    def infect_client(cls, client: NamespacedClient) -> NamespacedClient:
         addon = cls(weakref.proxy(client))
         setattr(client, cls.namespace, addon)
         return client

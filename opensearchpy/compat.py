@@ -47,7 +47,7 @@ def to_bytes(x: Union[str, bytes], encoding: str = "ascii") -> bytes:
 
 
 try:
-    reraise_exceptions: Tuple[Type[Exception], ...] = (RecursionError,)
+    reraise_exceptions: Tuple[Type[BaseException], ...] = (RecursionError,)
 except NameError:
     reraise_exceptions = ()
 

@@ -29,6 +29,7 @@ import asyncio
 import logging
 import sys
 from itertools import chain
+from typing import Any
 
 from ..connection_pool import ConnectionPool
 from ..exceptions import (
@@ -340,7 +341,9 @@ class AsyncTransport(Transport):
     def get_connection(self):
         return self.connection_pool.get_connection()
 
-    async def perform_request(self, method, url, headers=None, params=None, body=None):
+    async def perform_request(
+        self, method: str, url: str, headers=None, params=None, body=None
+    ) -> Any:
         """
         Perform the actual request. Retrieve a connection from the connection
         pool, pass all the information to its perform_request method and
