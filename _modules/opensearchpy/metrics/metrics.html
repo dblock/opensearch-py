@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>opensearchpy.client.remote &mdash; OpenSearch Python Client  documentation</title>
+  <title>opensearchpy.metrics.metrics &mdash; OpenSearch Python Client  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -71,8 +71,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-          <li class="breadcrumb-item"><a href="../client.html">opensearchpy.client</a></li>
-      <li class="breadcrumb-item active">opensearchpy.client.remote</li>
+      <li class="breadcrumb-item active">opensearchpy.metrics.metrics</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,7 +80,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for opensearchpy.client.remote</h1><div class="highlight"><pre>
+  <h1>Source code for opensearchpy.metrics.metrics</h1><div class="highlight"><pre>
 <span></span><span class="c1"># SPDX-License-Identifier: Apache-2.0</span>
 <span class="c1">#</span>
 <span class="c1"># The OpenSearch Contributors require contributions made to</span>
@@ -90,36 +89,40 @@
 <span class="c1">#</span>
 <span class="c1"># Modifications Copyright OpenSearch Contributors. See</span>
 <span class="c1"># GitHub history for details.</span>
-<span class="c1">#</span>
-<span class="c1">#  Licensed to Elasticsearch B.V. under one or more contributor</span>
-<span class="c1">#  license agreements. See the NOTICE file distributed with</span>
-<span class="c1">#  this work for additional information regarding copyright</span>
-<span class="c1">#  ownership. Elasticsearch B.V. licenses this file to you under</span>
-<span class="c1">#  the Apache License, Version 2.0 (the &quot;License&quot;); you may</span>
-<span class="c1">#  not use this file except in compliance with the License.</span>
-<span class="c1">#  You may obtain a copy of the License at</span>
-<span class="c1">#</span>
-<span class="c1"># 	http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="c1">#</span>
-<span class="c1">#  Unless required by applicable law or agreed to in writing,</span>
-<span class="c1">#  software distributed under the License is distributed on an</span>
-<span class="c1">#  &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="c1">#  KIND, either express or implied.  See the License for the</span>
-<span class="c1">#  specific language governing permissions and limitations</span>
-<span class="c1">#  under the License.</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<div class="viewcode-block" id="Metrics"><a class="viewcode-back" href="../../../api-ref/metrics.html#opensearchpy.Metrics">[docs]</a><span class="k">class</span> <span class="nc">Metrics</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Metrics class defines methods and properties for managing</span>
+<span class="sd">    request metrics, including start time, end time, and service time,</span>
+<span class="sd">    serving as a blueprint for concrete implementations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">NamespacedClient</span><span class="p">,</span> <span class="n">query_params</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">request_start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
 
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">request_end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
 
-<div class="viewcode-block" id="RemoteClient"><a class="viewcode-back" href="../../../api-ref/clients/remote_client.html#opensearchpy.client.remote.RemoteClient">[docs]</a><span class="k">class</span> <span class="nc">RemoteClient</span><span class="p">(</span><span class="n">NamespacedClient</span><span class="p">):</span>
-    <span class="nd">@query_params</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
-            <span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/_remote/info&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
-        <span class="p">)</span></div>
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">start_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">end_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">service_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">pass</span></div>
 </pre></div>
 
            </div>
