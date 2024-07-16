@@ -422,9 +422,9 @@
 
 
 <span class="sd">        :arg index: Name of the data stream or index to target. If the</span>
-<span class="sd">            target doesn’t exist and matches the name or wildcard (`*`) pattern of</span>
+<span class="sd">            target doesn&#39;t exist and matches the name or wildcard (`*`) pattern of</span>
 <span class="sd">            an index template with a `data_stream` definition, this request creates</span>
-<span class="sd">            the data stream. If the target doesn’t exist and doesn’t match a data</span>
+<span class="sd">            the data stream. If the target doesn&#39;t exist and doesn&#39;t match a data</span>
 <span class="sd">            stream template, this request creates the index.</span>
 <span class="sd">        :arg id: Unique identifier for the document.</span>
 <span class="sd">        :arg body: The document</span>
@@ -441,7 +441,7 @@
 <span class="sd">            regardless of the value of this parameter.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes the affected</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes the affected</span>
 <span class="sd">            shards to make this operation visible to search, if `wait_for` then wait</span>
 <span class="sd">            for a refresh to make this operation visible to search, if `false` do</span>
 <span class="sd">            nothing with refreshes.Valid values: `true`, `false`, `wait_for`.</span>
@@ -456,8 +456,8 @@
 <span class="sd">            control.The specified version must match the current version of the</span>
 <span class="sd">            document for the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: `external`,</span>
-<span class="sd">            `external_gte`. Valid choices are internal, external, external_gte,</span>
-<span class="sd">            force.</span>
+<span class="sd">            `external_gte`. Valid choices are external, external_gte, force,</span>
+<span class="sd">            internal.</span>
 <span class="sd">        :arg wait_for_active_shards: The number of shard copies that</span>
 <span class="sd">            must be active before proceeding with the operation.Set to `all` or any</span>
 <span class="sd">            positive integer up to the total number of shards in the index</span>
@@ -529,7 +529,7 @@
 <span class="sd">            regardless of the value of this parameter.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes the affected</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes the affected</span>
 <span class="sd">            shards to make this operation visible to search, if `wait_for` then wait</span>
 <span class="sd">            for a refresh to make this operation visible to search, if `false` do</span>
 <span class="sd">            nothing with refreshes.Valid values: `true`, `false`, `wait_for`.</span>
@@ -546,8 +546,8 @@
 <span class="sd">            control.The specified version must match the current version of the</span>
 <span class="sd">            document for the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: `external`,</span>
-<span class="sd">            `external_gte`. Valid choices are internal, external, external_gte,</span>
-<span class="sd">            force.</span>
+<span class="sd">            `external_gte`. Valid choices are external, external_gte, force,</span>
+<span class="sd">            internal.</span>
 <span class="sd">        :arg wait_for_active_shards: The number of shard copies that</span>
 <span class="sd">            must be active before proceeding with the operation.Set to all or any</span>
 <span class="sd">            positive integer up to the total number of shards in the index</span>
@@ -615,11 +615,11 @@
 <span class="sd">            regardless of the value of this parameter.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes the affected</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes the affected</span>
 <span class="sd">            shards to make this operation visible to search, if `wait_for` then wait</span>
 <span class="sd">            for a refresh to make this operation visible to search, if `false` do</span>
 <span class="sd">            nothing with refreshes.Valid values: `true`, `false`, `wait_for`.</span>
-<span class="sd">        :arg require_alias: If `true`, the request’s actions must target</span>
+<span class="sd">        :arg require_alias: If `true`, the request&#39;s actions must target</span>
 <span class="sd">            an index alias. Default is false.</span>
 <span class="sd">        :arg routing: Custom value used to route operations to a</span>
 <span class="sd">            specific shard.</span>
@@ -741,8 +741,8 @@
 <span class="sd">        :arg expand_wildcards: Type of index that wildcard patterns can</span>
 <span class="sd">            match.If the request can target data streams, this argument determines</span>
 <span class="sd">            whether wildcard expressions match hidden data streams.Supports comma-</span>
-<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, open,</span>
-<span class="sd">            closed, hidden, none.</span>
+<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, closed,</span>
+<span class="sd">            hidden, none, open.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
@@ -765,8 +765,8 @@
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg terminate_after: Maximum number of documents to collect for</span>
-<span class="sd">            each shard.If a query reaches this limit, Opensearch terminates the</span>
-<span class="sd">            query early.Opensearch collects documents before sorting.</span>
+<span class="sd">            each shard.If a query reaches this limit, OpenSearch terminates the</span>
+<span class="sd">            query early.OpenSearch collects documents before sorting.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
@@ -816,7 +816,7 @@
 <span class="sd">            this sequence number.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes the affected</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes the affected</span>
 <span class="sd">            shards to make this operation visible to search, if `wait_for` then wait</span>
 <span class="sd">            for a refresh to make this operation visible to search, if `false` do</span>
 <span class="sd">            nothing with refreshes.Valid values: `true`, `false`, `wait_for`.</span>
@@ -829,8 +829,8 @@
 <span class="sd">            control.The specified version must match the current version of the</span>
 <span class="sd">            document for the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: `external`,</span>
-<span class="sd">            `external_gte`. Valid choices are internal, external, external_gte,</span>
-<span class="sd">            force.</span>
+<span class="sd">            `external_gte`. Valid choices are external, external_gte, force,</span>
+<span class="sd">            internal.</span>
 <span class="sd">        :arg wait_for_active_shards: The number of shard copies that</span>
 <span class="sd">            must be active before proceeding with the operation.Set to `all` or any</span>
 <span class="sd">            positive integer up to the total number of shards in the index</span>
@@ -929,7 +929,7 @@
 <span class="sd">            `open`, `closed`, `hidden`, `none`.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
-<span class="sd">        :arg from_: Starting offset (default: 0) Default is 0.</span>
+<span class="sd">        :arg from_: Starting offset. Default is 0.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg ignore_unavailable: If `false`, the request returns an</span>
@@ -943,7 +943,7 @@
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
 <span class="sd">        :arg q: Query in the Lucene query string syntax.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes all shards</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes all shards</span>
 <span class="sd">            involved in the delete by query after the request completes.</span>
 <span class="sd">        :arg request_cache: If `true`, the request cache is used for</span>
 <span class="sd">            this request.Defaults to the index-level setting.</span>
@@ -958,7 +958,7 @@
 <span class="sd">            request.Defaults to no timeout.</span>
 <span class="sd">        :arg search_type: The type of the search operation.Available</span>
 <span class="sd">            options: `query_then_fetch`, `dfs_query_then_fetch`. Valid choices are</span>
-<span class="sd">            query_then_fetch, dfs_query_then_fetch.</span>
+<span class="sd">            dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg size: Deprecated, please use `max_docs` instead.</span>
 <span class="sd">        :arg slices: The number of slices this task should be divided</span>
 <span class="sd">            into. Valid choices are auto.</span>
@@ -968,10 +968,10 @@
 <span class="sd">        :arg stats: Specific `tag` of the request for logging and</span>
 <span class="sd">            statistical purposes.</span>
 <span class="sd">        :arg terminate_after: Maximum number of documents to collect for</span>
-<span class="sd">            each shard.If a query reaches this limit, Opensearch terminates the</span>
-<span class="sd">            query early.Opensearch collects documents before sorting.Use with</span>
-<span class="sd">            caution.Opensearch applies this parameter to each shard handling the</span>
-<span class="sd">            request.When possible, let Opensearch perform early termination</span>
+<span class="sd">            each shard.If a query reaches this limit, OpenSearch terminates the</span>
+<span class="sd">            query early.OpenSearch collects documents before sorting.Use with</span>
+<span class="sd">            caution.OpenSearch applies this parameter to each shard handling the</span>
+<span class="sd">            request.When possible, let OpenSearch perform early termination</span>
 <span class="sd">            automatically.Avoid specifying this parameter for requests that target</span>
 <span class="sd">            data streams with backing indices across multiple data tiers.</span>
 <span class="sd">        :arg timeout: Period each deletion request waits for active</span>
@@ -1136,7 +1136,7 @@
 <span class="sd">            response.</span>
 <span class="sd">        :arg realtime: If `true`, the request is real-time as opposed to</span>
 <span class="sd">            near-real-time.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes all shards</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes all shards</span>
 <span class="sd">            involved in the delete by query after the request completes.</span>
 <span class="sd">        :arg routing: Target the specified primary shard.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
@@ -1149,8 +1149,8 @@
 <span class="sd">            control.The specified version must match the current version of the</span>
 <span class="sd">            document for the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: `external`,</span>
-<span class="sd">            `external_gte`. Valid choices are internal, external, external_gte,</span>
-<span class="sd">            force.</span>
+<span class="sd">            `external_gte`. Valid choices are external, external_gte, force,</span>
+<span class="sd">            internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
@@ -1208,7 +1208,7 @@
 <span class="sd">            response.</span>
 <span class="sd">        :arg realtime: If true, the request is real-time as opposed to</span>
 <span class="sd">            near-real-time.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes all shards</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes all shards</span>
 <span class="sd">            involved in the delete by query after the request completes.</span>
 <span class="sd">        :arg routing: Target the specified primary shard.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
@@ -1217,8 +1217,8 @@
 <span class="sd">            control.The specified version must match the current version of the</span>
 <span class="sd">            document for the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: `external`,</span>
-<span class="sd">            `external_gte`. Valid choices are internal, external, external_gte,</span>
-<span class="sd">            force.</span>
+<span class="sd">            `external_gte`. Valid choices are external, external_gte, force,</span>
+<span class="sd">            internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
@@ -1349,8 +1349,8 @@
 <span class="sd">        :arg expand_wildcards: Type of index that wildcard patterns can</span>
 <span class="sd">            match. If the request can target data streams, this argument determines</span>
 <span class="sd">            whether wildcard expressions match hidden data streams. Supports comma-</span>
-<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, open,</span>
-<span class="sd">            closed, hidden, none.</span>
+<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, closed,</span>
+<span class="sd">            hidden, none, open.</span>
 <span class="sd">        :arg fields: Comma-separated list of fields to retrieve</span>
 <span class="sd">            capabilities for. Wildcard (`*`) expressions are supported.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
@@ -1422,7 +1422,7 @@
 <span class="sd">            response.</span>
 <span class="sd">        :arg realtime: If `true`, the request is real-time as opposed to</span>
 <span class="sd">            near-real-time.</span>
-<span class="sd">        :arg refresh: If true, Opensearch refreshes the affected shards</span>
+<span class="sd">        :arg refresh: If true, OpenSearch refreshes the affected shards</span>
 <span class="sd">            to make this operation visible to search. If false, do nothing with</span>
 <span class="sd">            refreshes.</span>
 <span class="sd">        :arg routing: Target the specified primary shard.</span>
@@ -1436,7 +1436,7 @@
 <span class="sd">            The specified version must match the current version of the document for</span>
 <span class="sd">            the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: internal, external,</span>
-<span class="sd">            external_gte. Valid choices are internal, external, external_gte, force.</span>
+<span class="sd">            external_gte. Valid choices are external, external_gte, force, internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
@@ -1536,7 +1536,7 @@
 <span class="sd">            response.</span>
 <span class="sd">        :arg realtime: Boolean) If true, the request is real-time as</span>
 <span class="sd">            opposed to near-real-time.</span>
-<span class="sd">        :arg refresh: If true, Opensearch refreshes the affected shards</span>
+<span class="sd">        :arg refresh: If true, OpenSearch refreshes the affected shards</span>
 <span class="sd">            to make this operation visible to search. If false, do nothing with</span>
 <span class="sd">            refreshes.</span>
 <span class="sd">        :arg routing: Target the specified primary shard.</span>
@@ -1546,7 +1546,7 @@
 <span class="sd">            The specified version must match the current version of the document for</span>
 <span class="sd">            the request to succeed.</span>
 <span class="sd">        :arg version_type: Specific version type: internal, external,</span>
-<span class="sd">            external_gte. Valid choices are internal, external, external_gte, force.</span>
+<span class="sd">            external_gte. Valid choices are external, external_gte, force, internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
@@ -1689,7 +1689,7 @@
 <span class="sd">            Default is false.</span>
 <span class="sd">        :arg search_type: Indicates whether global term and document</span>
 <span class="sd">            frequencies should be used when scoring returned documents. Valid</span>
-<span class="sd">            choices are query_then_fetch, dfs_query_then_fetch.</span>
+<span class="sd">            choices are dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg typed_keys: Specifies whether aggregation and suggester</span>
@@ -1752,7 +1752,7 @@
 <span class="sd">            object. Default is false.</span>
 <span class="sd">        :arg search_type: The type of the search operation.Available</span>
 <span class="sd">            options: `query_then_fetch`, `dfs_query_then_fetch`. Valid choices are</span>
-<span class="sd">            query_then_fetch, dfs_query_then_fetch.</span>
+<span class="sd">            dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg typed_keys: If `true`, the response prefixes aggregation</span>
@@ -1840,7 +1840,7 @@
 <span class="sd">        :arg version: If `true`, returns the document version as part of</span>
 <span class="sd">            a hit.</span>
 <span class="sd">        :arg version_type: Specific version type. Valid choices are</span>
-<span class="sd">            internal, external, external_gte, force.</span>
+<span class="sd">            external, external_gte, force, internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">_make_path</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;_mtermvectors&quot;</span><span class="p">)</span>
 
@@ -1947,7 +1947,7 @@
 <span class="sd">            errors.</span>
 <span class="sd">        :arg expand_wildcards: Whether to expand wildcard expression to</span>
 <span class="sd">            concrete indices that are open, closed or both. Valid choices are all,</span>
-<span class="sd">            open, closed, hidden, none.</span>
+<span class="sd">            closed, hidden, none, open.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
@@ -2006,8 +2006,8 @@
 <span class="sd">            the response.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
-<span class="sd">        :arg max_docs: Maximum number of documents to process (default:</span>
-<span class="sd">            all documents).</span>
+<span class="sd">        :arg max_docs: Maximum number of documents to process. By</span>
+<span class="sd">            default, all documents.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
 <span class="sd">        :arg refresh: If `true`, the request refreshes affected shards</span>
@@ -2017,7 +2017,7 @@
 <span class="sd">        :arg scroll: Specifies how long a consistent view of the index</span>
 <span class="sd">            should be maintained for scrolled search.</span>
 <span class="sd">        :arg slices: The number of slices this task should be divided</span>
-<span class="sd">            into.Defaults to 1 slice, meaning the task isn’t sliced into subtasks.</span>
+<span class="sd">            into.Defaults to 1 slice, meaning the task isn&#39;t sliced into subtasks.</span>
 <span class="sd">            Valid choices are auto.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
@@ -2170,9 +2170,9 @@
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg rest_total_hits_as_int: If true, the API response’s</span>
+<span class="sd">        :arg rest_total_hits_as_int: If true, the API response&#39;s</span>
 <span class="sd">            hit.total property is returned as an integer. If false, the API</span>
-<span class="sd">            response’s hit.total property is returned as an object. Default is</span>
+<span class="sd">            response&#39;s hit.total property is returned as an object. Default is</span>
 <span class="sd">            false.</span>
 <span class="sd">        :arg scroll: Period to retain the search context for scrolling.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
@@ -2198,6 +2198,7 @@
         <span class="s2">&quot;analyze_wildcard&quot;</span><span class="p">,</span>
         <span class="s2">&quot;analyzer&quot;</span><span class="p">,</span>
         <span class="s2">&quot;batched_reduce_size&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cancel_after_time_interval&quot;</span><span class="p">,</span>
         <span class="s2">&quot;ccs_minimize_roundtrips&quot;</span><span class="p">,</span>
         <span class="s2">&quot;default_operator&quot;</span><span class="p">,</span>
         <span class="s2">&quot;df&quot;</span><span class="p">,</span>
@@ -2213,6 +2214,7 @@
         <span class="s2">&quot;include_named_queries_score&quot;</span><span class="p">,</span>
         <span class="s2">&quot;lenient&quot;</span><span class="p">,</span>
         <span class="s2">&quot;max_concurrent_shard_requests&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;phase_took&quot;</span><span class="p">,</span>
         <span class="s2">&quot;pre_filter_shard_size&quot;</span><span class="p">,</span>
         <span class="s2">&quot;preference&quot;</span><span class="p">,</span>
         <span class="s2">&quot;pretty&quot;</span><span class="p">,</span>
@@ -2291,6 +2293,9 @@
 <span class="sd">            used as a protection mechanism to reduce the memory overhead per search</span>
 <span class="sd">            request if the potential number of shards in the request can be large.</span>
 <span class="sd">            Default is 512.</span>
+<span class="sd">        :arg cancel_after_time_interval: The time after which the search</span>
+<span class="sd">            request will be canceled.Request-level parameter takes precedence over</span>
+<span class="sd">            `cancel_after_time_interval` cluster setting.</span>
 <span class="sd">        :arg ccs_minimize_roundtrips: If true, network round-trips</span>
 <span class="sd">            between the coordinating node and the remote clusters are minimized when</span>
 <span class="sd">            executing cross-cluster search (CCS) requests. Default is True.</span>
@@ -2307,8 +2312,8 @@
 <span class="sd">        :arg expand_wildcards: Type of index that wildcard patterns can</span>
 <span class="sd">            match.If the request can target data streams, this argument determines</span>
 <span class="sd">            whether wildcard expressions match hidden data streams.Supports comma-</span>
-<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, open,</span>
-<span class="sd">            closed, hidden, none.</span>
+<span class="sd">            separated values, such as `open,hidden`. Valid choices are all, closed,</span>
+<span class="sd">            hidden, none, open.</span>
 <span class="sd">        :arg explain: If `true`, returns detailed information about</span>
 <span class="sd">            score computation as part of a hit.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
@@ -2336,6 +2341,8 @@
 <span class="sd">            concurrently.This value should be used to limit the impact of the search</span>
 <span class="sd">            on the cluster in order to limit the number of concurrent shard</span>
 <span class="sd">            requests. Default is 5.</span>
+<span class="sd">        :arg phase_took: Indicates whether to return phase-level `took`</span>
+<span class="sd">            time values in the response. Default is false.</span>
 <span class="sd">        :arg pre_filter_shard_size: Defines a threshold that enforces a</span>
 <span class="sd">            pre-filter roundtrip to prefilter search shards based on query rewriting</span>
 <span class="sd">            if the number of shards the search request expands to exceeds the</span>
@@ -2347,7 +2354,7 @@
 <span class="sd">            targets more than 128 shards;the request targets one or more read-only</span>
 <span class="sd">            index;the primary sort of the query targets an indexed field.</span>
 <span class="sd">        :arg preference: Nodes and shards used for the search.By</span>
-<span class="sd">            default, Opensearch selects from eligible nodes and shards using</span>
+<span class="sd">            default, OpenSearch selects from eligible nodes and shards using</span>
 <span class="sd">            adaptive replica selection, accounting for allocation awareness. Valid</span>
 <span class="sd">            values are:`_only_local` to run the search only on shards on the local</span>
 <span class="sd">            node;`_local` to, if possible, run the search on shards on the local</span>
@@ -2367,7 +2374,7 @@
 <span class="sd">            response.</span>
 <span class="sd">        :arg q: Query in the Lucene query string syntax using query</span>
 <span class="sd">            parameter search.Query parameter searches do not support the full</span>
-<span class="sd">            Opensearch Query DSL but are handy for testing.</span>
+<span class="sd">            OpenSearch Query DSL but are handy for testing.</span>
 <span class="sd">        :arg request_cache: If `true`, the caching of search results is</span>
 <span class="sd">            enabled for requests where `size` is `0`.Defaults to index level</span>
 <span class="sd">            settings.</span>
@@ -2383,8 +2390,8 @@
 <span class="sd">        :arg search_pipeline: Customizable sequence of processing stages</span>
 <span class="sd">            applied to search queries.</span>
 <span class="sd">        :arg search_type: How distributed term frequencies are</span>
-<span class="sd">            calculated for relevance scoring. Valid choices are query_then_fetch,</span>
-<span class="sd">            dfs_query_then_fetch.</span>
+<span class="sd">            calculated for relevance scoring. Valid choices are</span>
+<span class="sd">            dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg seq_no_primary_term: If `true`, returns sequence number and</span>
 <span class="sd">            primary term of the last modification of each hit.</span>
 <span class="sd">        :arg size: Defines the number of hits to return.By default, you</span>
@@ -2405,7 +2412,7 @@
 <span class="sd">            suggestions.</span>
 <span class="sd">        :arg suggest_mode: Specifies the suggest mode.This parameter can</span>
 <span class="sd">            only be used when the `suggest_field` and `suggest_text` query string</span>
-<span class="sd">            parameters are specified. Valid choices are missing, popular, always.</span>
+<span class="sd">            parameters are specified. Valid choices are always, missing, popular.</span>
 <span class="sd">        :arg suggest_size: Number of suggestions to return.This</span>
 <span class="sd">            parameter can only be used when the `suggest_field` and `suggest_text`</span>
 <span class="sd">            query string parameters are specified.</span>
@@ -2414,10 +2421,10 @@
 <span class="sd">            `suggest_field` and `suggest_text` query string parameters are</span>
 <span class="sd">            specified.</span>
 <span class="sd">        :arg terminate_after: Maximum number of documents to collect for</span>
-<span class="sd">            each shard.If a query reaches this limit, Opensearch terminates the</span>
-<span class="sd">            query early.Opensearch collects documents before sorting.Use with</span>
-<span class="sd">            caution.Opensearch applies this parameter to each shard handling the</span>
-<span class="sd">            request.When possible, let Opensearch perform early termination</span>
+<span class="sd">            each shard.If a query reaches this limit, OpenSearch terminates the</span>
+<span class="sd">            query early.OpenSearch collects documents before sorting.Use with</span>
+<span class="sd">            caution.OpenSearch applies this parameter to each shard handling the</span>
+<span class="sd">            request.When possible, let OpenSearch perform early termination</span>
 <span class="sd">            automatically.Avoid specifying this parameter for requests that target</span>
 <span class="sd">            data streams with backing indices across multiple data tiers.If set to</span>
 <span class="sd">            `0` (default), the query does not terminate early.</span>
@@ -2578,7 +2585,7 @@
 <span class="sd">        :arg scroll: Specifies how long a consistent view of the</span>
 <span class="sd">            indexshould be maintained for scrolled search.</span>
 <span class="sd">        :arg search_type: The type of the search operation. Valid</span>
-<span class="sd">            choices are query_then_fetch, dfs_query_then_fetch.</span>
+<span class="sd">            choices are dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg typed_keys: If `true`, the response prefixes aggregation</span>
@@ -2664,7 +2671,7 @@
 <span class="sd">        :arg version: If `true`, returns the document version as part of</span>
 <span class="sd">            a hit.</span>
 <span class="sd">        :arg version_type: Specific version type. Valid choices are</span>
-<span class="sd">            internal, external, external_gte, force.</span>
+<span class="sd">            external, external_gte, force, internal.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">SKIP_IN_PATH</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty value passed for a required argument &#39;index&#39;.&quot;</span><span class="p">)</span>
@@ -2729,10 +2736,10 @@
 <span class="sd">        :arg lang: The script language. Default is painless.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
-<span class="sd">        :arg refresh: If &#39;true&#39;, Opensearch refreshes the affected</span>
+<span class="sd">        :arg refresh: If &#39;true&#39;, OpenSearch refreshes the affected</span>
 <span class="sd">            shards to make this operationvisible to search, if &#39;wait_for&#39; then wait</span>
 <span class="sd">            for a refresh to make this operationvisible to search, if &#39;false&#39; do</span>
-<span class="sd">            nothing with refreshes. Valid choices are true, false, wait_for.</span>
+<span class="sd">            nothing with refreshes. Valid choices are false, true, wait_for.</span>
 <span class="sd">        :arg require_alias: If true, the destination must be an index</span>
 <span class="sd">            alias. Default is false.</span>
 <span class="sd">        :arg retry_on_conflict: Specify how many times should the</span>
@@ -2742,7 +2749,7 @@
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg timeout: Period to wait for dynamic mapping updates and</span>
-<span class="sd">            active shards.This guarantees Opensearch waits for at least the timeout</span>
+<span class="sd">            active shards.This guarantees OpenSearch waits for at least the timeout</span>
 <span class="sd">            before failing.The actual wait time could be longer, particularly when</span>
 <span class="sd">            multiple waits occur.</span>
 <span class="sd">        :arg wait_for_active_shards: The number of shard copies that</span>
@@ -2848,7 +2855,7 @@
 <span class="sd">            `closed`, `hidden`, `none`.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
-<span class="sd">        :arg from_: Starting offset (default: 0) Default is 0.</span>
+<span class="sd">        :arg from_: Starting offset. Default is 0.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg ignore_unavailable: If `false`, the request returns an</span>
@@ -2867,7 +2874,7 @@
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
 <span class="sd">            response.</span>
 <span class="sd">        :arg q: Query in the Lucene query string syntax.</span>
-<span class="sd">        :arg refresh: If `true`, Opensearch refreshes affected shards to</span>
+<span class="sd">        :arg refresh: If `true`, OpenSearch refreshes affected shards to</span>
 <span class="sd">            make the operation visible to search.</span>
 <span class="sd">        :arg request_cache: If `true`, the request cache is used for</span>
 <span class="sd">            this request.</span>
@@ -2881,7 +2888,7 @@
 <span class="sd">        :arg search_timeout: Explicit timeout for each search request.</span>
 <span class="sd">        :arg search_type: The type of the search operation. Available</span>
 <span class="sd">            options: `query_then_fetch`, `dfs_query_then_fetch`. Valid choices are</span>
-<span class="sd">            query_then_fetch, dfs_query_then_fetch.</span>
+<span class="sd">            dfs_query_then_fetch, query_then_fetch.</span>
 <span class="sd">        :arg size: Deprecated, please use `max_docs` instead.</span>
 <span class="sd">        :arg slices: The number of slices this task should be divided</span>
 <span class="sd">            into. Valid choices are auto.</span>
@@ -2891,10 +2898,10 @@
 <span class="sd">        :arg stats: Specific `tag` of the request for logging and</span>
 <span class="sd">            statistical purposes.</span>
 <span class="sd">        :arg terminate_after: Maximum number of documents to collect for</span>
-<span class="sd">            each shard.If a query reaches this limit, Opensearch terminates the</span>
-<span class="sd">            query early.Opensearch collects documents before sorting.Use with</span>
-<span class="sd">            caution.Opensearch applies this parameter to each shard handling the</span>
-<span class="sd">            request.When possible, let Opensearch perform early termination</span>
+<span class="sd">            each shard.If a query reaches this limit, OpenSearch terminates the</span>
+<span class="sd">            query early.OpenSearch collects documents before sorting.Use with</span>
+<span class="sd">            caution.OpenSearch applies this parameter to each shard handling the</span>
+<span class="sd">            request.When possible, let OpenSearch perform early termination</span>
 <span class="sd">            automatically.Avoid specifying this parameter for requests that target</span>
 <span class="sd">            data streams with backing indices across multiple data tiers.</span>
 <span class="sd">        :arg timeout: Period each update request waits for the following</span>
@@ -3041,7 +3048,7 @@
 <span class="sd">            errors.</span>
 <span class="sd">        :arg expand_wildcards: Whether to expand wildcard expression to</span>
 <span class="sd">            concrete indices that are open, closed or both. Valid choices are all,</span>
-<span class="sd">            open, closed, hidden, none.</span>
+<span class="sd">            closed, hidden, none, open.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>

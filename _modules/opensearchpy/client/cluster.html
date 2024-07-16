@@ -166,14 +166,14 @@
 <span class="sd">            errors.</span>
 <span class="sd">        :arg expand_wildcards: Whether to expand wildcard expression to</span>
 <span class="sd">            concrete indices that are open, closed or both. Valid choices are all,</span>
-<span class="sd">            open, closed, hidden, none.</span>
+<span class="sd">            closed, hidden, none, open.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg level: Can be one of cluster, indices or shards. Controls</span>
 <span class="sd">            the details level of the health information returned. Valid choices are</span>
-<span class="sd">            cluster, indices, shards, awareness_attributes.</span>
+<span class="sd">            awareness_attributes, cluster, indices, shards.</span>
 <span class="sd">        :arg local: If true, the request retrieves information from the</span>
 <span class="sd">            local node only. Defaults to false, which means information is retrieved</span>
 <span class="sd">            from the master node. Default is false.</span>
@@ -193,8 +193,8 @@
 <span class="sd">            be active, or 0 to not wait. Valid choices are all, index-setting.</span>
 <span class="sd">        :arg wait_for_events: Can be one of immediate, urgent, high,</span>
 <span class="sd">            normal, low, languid. Wait until all currently queued events with the</span>
-<span class="sd">            given priority are processed. Valid choices are immediate, urgent, high,</span>
-<span class="sd">            normal, low, languid.</span>
+<span class="sd">            given priority are processed. Valid choices are high, immediate,</span>
+<span class="sd">            languid, low, normal, urgent.</span>
 <span class="sd">        :arg wait_for_no_initializing_shards: A boolean value which</span>
 <span class="sd">            controls whether to wait (until the timeout provided) for the cluster to</span>
 <span class="sd">            have no shard initializations. Defaults to false, which means it will</span>
@@ -210,7 +210,7 @@
 <span class="sd">        :arg wait_for_status: One of green, yellow or red. Will wait</span>
 <span class="sd">            (until the timeout provided) until the status of the cluster changes to</span>
 <span class="sd">            the one provided or better, i.e. green &gt; yellow &gt; red. By default, will</span>
-<span class="sd">            not wait for any status. Valid choices are green, yellow, red.</span>
+<span class="sd">            not wait for any status. Valid choices are green, red, yellow.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
@@ -303,17 +303,17 @@
 <span class="sd">            errors.</span>
 <span class="sd">        :arg expand_wildcards: Whether to expand wildcard expression to</span>
 <span class="sd">            concrete indices that are open, closed or both. Valid choices are all,</span>
-<span class="sd">            open, closed, hidden, none.</span>
+<span class="sd">            closed, hidden, none, open.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
-<span class="sd">        :arg flat_settings: Return settings in flat format (default:</span>
-<span class="sd">            false) Default is false.</span>
+<span class="sd">        :arg flat_settings: Return settings in flat format. Default is</span>
+<span class="sd">            false.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg ignore_unavailable: Whether specified concrete indices</span>
 <span class="sd">            should be ignored when unavailable (missing or closed)</span>
 <span class="sd">        :arg local: Return local information, do not retrieve the state</span>
-<span class="sd">            from cluster-manager node (default: false) Default is false.</span>
+<span class="sd">            from cluster-manager node. Default is false.</span>
 <span class="sd">        :arg master_timeout (Deprecated: To promote inclusive language,</span>
 <span class="sd">            use &#39;cluster_manager_timeout&#39; instead.): Specify timeout for connection</span>
 <span class="sd">            to master</span>
@@ -372,7 +372,7 @@
 <span class="sd">        :arg timeout: Period to wait for each node to respond.If a node</span>
 <span class="sd">            does not respond before its timeout expires, the response does not</span>
 <span class="sd">            include its stats.However, timed out nodes are included in the</span>
-<span class="sd">            response’s `_nodes.failed` property. Defaults to no timeout.</span>
+<span class="sd">            response&#39;s `_nodes.failed` property. Defaults to no timeout.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">perform_request</span><span class="p">(</span>
             <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
@@ -521,8 +521,8 @@
 <span class="sd">            errors.</span>
 <span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
 <span class="sd">            the response.</span>
-<span class="sd">        :arg flat_settings: Return settings in flat format (default:</span>
-<span class="sd">            false) Default is false.</span>
+<span class="sd">        :arg flat_settings: Return settings in flat format. Default is</span>
+<span class="sd">            false.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
 <span class="sd">            statistics.</span>
 <span class="sd">        :arg master_timeout (Deprecated: To promote inclusive language,</span>
@@ -733,14 +733,14 @@
 <span class="sd">        Creates or updates a component template.</span>
 
 
-<span class="sd">        :arg name: Name of the component template to create. Opensearch</span>
+<span class="sd">        :arg name: Name of the component template to create. OpenSearch</span>
 <span class="sd">            includes the following built-in component templates: `logs-mappings`;</span>
 <span class="sd">            &#39;logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-</span>
-<span class="sd">            mapping`; `synthetics-settings`. Opensearch Agent uses these templates</span>
-<span class="sd">            to configure backing indices for its data streams. If you use Opensearch</span>
+<span class="sd">            mapping`; `synthetics-settings`. OpenSearch Agent uses these templates</span>
+<span class="sd">            to configure backing indices for its data streams. If you use OpenSearch</span>
 <span class="sd">            Agent and want to overwrite one of these templates, set the `version`</span>
 <span class="sd">            for your replacement template higher than the current version. If you</span>
-<span class="sd">            don’t use Opensearch Agent and want to disable all built-in component</span>
+<span class="sd">            don&#39;t use OpenSearch Agent and want to disable all built-in component</span>
 <span class="sd">            and index templates, set `stack.templates.enabled` to `false` using the</span>
 <span class="sd">            cluster update settings API.</span>
 <span class="sd">        :arg body: The template definition</span>
