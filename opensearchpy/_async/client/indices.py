@@ -58,8 +58,10 @@ class IndicesClient(NamespacedClient):
         :arg index: The name of the index to scope the operation.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -109,8 +111,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -160,8 +164,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg force: If `true`, the request forces a flush even if there
             are no changes to commit to the index.
         :arg human: Whether to return human readable values for
@@ -210,8 +216,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -270,8 +278,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -349,8 +359,10 @@ class IndicesClient(NamespacedClient):
             determines whether wildcard expressions match hidden data streams.
             Supports comma-separated values, such as open,hidden. Valid choices are
             all, closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If true, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -424,8 +436,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -496,8 +510,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -565,8 +581,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -629,8 +647,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If `true`, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -694,8 +714,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -767,8 +789,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -827,8 +851,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -890,8 +916,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, requests that include a
@@ -950,8 +978,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -992,8 +1022,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -1044,8 +1076,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -1098,8 +1132,10 @@ class IndicesClient(NamespacedClient):
             existing index templates. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -1153,8 +1189,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: Return settings in flat format. Default is
             false.
         :arg human: Whether to return human readable values for
@@ -1205,8 +1243,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If `true`, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -1252,8 +1292,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -1321,8 +1363,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid choices are all, closed,
             hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If `true`, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -1391,8 +1435,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid choices are all, closed,
             hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If `true`, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -1468,8 +1514,10 @@ class IndicesClient(NamespacedClient):
             expressions of fields to include in fielddata statistics.
         :arg fields: Comma-separated list or wildcard expressions of
             fields to include in the statistics.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg forbid_closed_indices: If true, statistics are not
             collected from closed indices. Default is True.
         :arg groups: Comma-separated list of search groups to include in
@@ -1529,8 +1577,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -1605,8 +1655,10 @@ class IndicesClient(NamespacedClient):
             `open`, `closed`, `hidden`, `none`.
         :arg explain: If `true`, the response returns detailed
             information if an error has occurred.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -1673,8 +1725,10 @@ class IndicesClient(NamespacedClient):
             the `fielddata` parameter.
         :arg file: If true, clears the unused entries from the file
             cache on nodes with the Search role. Default is false.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If `false`, the request returns an
@@ -1718,8 +1772,10 @@ class IndicesClient(NamespacedClient):
             information about shard recoveries. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -1763,8 +1819,10 @@ class IndicesClient(NamespacedClient):
         :arg expand_wildcards: Whether to expand wildcard expression to
             concrete indices that are open, closed or both. Valid choices are all,
             closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: Whether specified concrete indices
@@ -1812,8 +1870,10 @@ class IndicesClient(NamespacedClient):
         :arg expand_wildcards: Whether to expand wildcard expression to
             concrete indices that are open, closed or both. Valid choices are all,
             closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: Whether specified concrete indices
@@ -1860,8 +1920,10 @@ class IndicesClient(NamespacedClient):
             match. If the request can target data streams, this argument determines
             whether wildcard expressions match hidden data streams. Valid choices
             are all, closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: If true, missing or closed indices are
@@ -1912,8 +1974,10 @@ class IndicesClient(NamespacedClient):
         :arg expand_wildcards: Whether to expand wildcard expression to
             concrete indices that are open, closed or both. Valid choices are all,
             closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flush: Specify whether the index should be flushed after
             performing the operation. Default is True.
         :arg human: Whether to return human readable values for
@@ -1975,8 +2039,10 @@ class IndicesClient(NamespacedClient):
             source index. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2048,8 +2114,10 @@ class IndicesClient(NamespacedClient):
             source index. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2121,8 +2189,10 @@ class IndicesClient(NamespacedClient):
             Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2173,8 +2243,10 @@ class IndicesClient(NamespacedClient):
         :arg body: The data stream definition
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -2208,8 +2280,10 @@ class IndicesClient(NamespacedClient):
             Wildcard (`*`) expressions are supported.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -2250,8 +2324,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2303,8 +2379,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: Return settings in flat format. Default is
             false.
         :arg human: Whether to return human readable values for
@@ -2354,8 +2432,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg flat_settings: If true, returns settings in flat format.
             Default is false.
         :arg human: Whether to return human readable values for
@@ -2408,8 +2488,10 @@ class IndicesClient(NamespacedClient):
             existing index templates. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2469,8 +2551,10 @@ class IndicesClient(NamespacedClient):
             only used for the simulation. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2509,8 +2593,10 @@ class IndicesClient(NamespacedClient):
             all data streams are returned.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -2558,8 +2644,10 @@ class IndicesClient(NamespacedClient):
             only used for the simulation. Default is false.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
@@ -2602,8 +2690,10 @@ class IndicesClient(NamespacedClient):
             whether wildcard expressions match hidden data streams. Supports comma-
             separated values, such as `open,hidden`. Valid values are: `all`,
             `open`, `closed`, `hidden`, `none`.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -2655,8 +2745,10 @@ class IndicesClient(NamespacedClient):
         :arg expand_wildcards: Whether to expand wildcard expression to
             concrete indices that are open, closed or both. Valid choices are all,
             closed, hidden, none, open.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg ignore_unavailable: Whether specified concrete indices
@@ -2694,8 +2786,10 @@ class IndicesClient(NamespacedClient):
             data streams in a cluster, omit this parameter or use `*`.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg pretty: Whether to pretty format the returned JSON
@@ -2743,8 +2837,10 @@ class IndicesClient(NamespacedClient):
             to cluster-manager node.
         :arg error_trace: Whether to include the stack trace of returned
             errors.
-        :arg filter_path: Comma-separated list of filters used to reduce
-            the response.
+        :arg filter_path: Used to reduce the response. This parameter
+            takes a comma-separated list of filters. It supports using wildcards to
+            match any field or part of a field’s name. You can also exclude fields
+            with "-".
         :arg human: Whether to return human readable values for
             statistics.
         :arg master_timeout (Deprecated: To promote inclusive language,
