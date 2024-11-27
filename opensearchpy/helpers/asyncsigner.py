@@ -8,6 +8,7 @@
 # GitHub history for details.
 
 from typing import Any, Dict, Optional, Union
+from urllib.parse import parse_qs, urlencode, urlparse
 
 
 class AWSV4SignerAsyncAuth:
@@ -56,7 +57,7 @@ class AWSV4SignerAsyncAuth:
         # create an AWS request object and sign it using SigV4Auth
         aws_request = AWSRequest(
             method=method,
-            url=url,
+            url=self._fetch_url(url),
             data=body,
         )
 
@@ -80,3 +81,22 @@ class AWSV4SignerAsyncAuth:
 
         # copy the headers from AWS request object into the prepared_request
         return dict(aws_request.headers.items())
+
+    def _fetch_url(self, url):  # type: ignore
+        """
+        This is a util method that helps in reconstructing the request url.
+        :param prepared_request: unsigned request
+        :return: reconstructed url
+        """
+        url = urlparse(url)
+        path = url.path or "/"
+
+        # fetch the query string if present in the request
+        querystring = ""
+        if url.query:
+            querystring = "?" + urlencode(
+                parse_qs(url.query, keep_blank_values=True), doseq=True
+            )
+
+        # construct the url and return
+        return url.scheme + "://" + url.netloc + path + querystring
