@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
@@ -5,22 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>opensearchpy.client.tasks &mdash; OpenSearch Python Client  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=7f485136" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
-        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -153,13 +151,15 @@
 <span class="sd">        :arg detailed: If `true`, the response includes detailed</span>
 <span class="sd">            information about shard recoveries. Default is false.</span>
 <span class="sd">        :arg error_trace: Whether to include the stack trace of returned</span>
-<span class="sd">            errors.</span>
-<span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
-<span class="sd">            the response.</span>
+<span class="sd">            errors. Default is false.</span>
+<span class="sd">        :arg filter_path: Used to reduce the response. This parameter</span>
+<span class="sd">            takes a comma-separated list of filters. It supports using wildcards to</span>
+<span class="sd">            match any field or part of a field’s name. You can also exclude fields</span>
+<span class="sd">            with &quot;-&quot;.</span>
 <span class="sd">        :arg group_by: Key used to group tasks in the response. Valid</span>
 <span class="sd">            choices are nodes, none, parents.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
-<span class="sd">            statistics.</span>
+<span class="sd">            statistics. Default is True.</span>
 <span class="sd">        :arg nodes: Comma-separated list of node IDs or names to limit</span>
 <span class="sd">            the returned information; use `_local` to return information from the</span>
 <span class="sd">            node you&#39;re connecting to, leave empty to get information from all</span>
@@ -168,7 +168,7 @@
 <span class="sd">            information. To return all tasks, omit this parameter or use a value of</span>
 <span class="sd">            `-1`.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
-<span class="sd">            response.</span>
+<span class="sd">            response. Default is false.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg timeout: Period to wait for a response. If no response is</span>
@@ -206,16 +206,18 @@
 <span class="sd">        :arg actions: Comma-separated list or wildcard expression of</span>
 <span class="sd">            actions used to limit the request.</span>
 <span class="sd">        :arg error_trace: Whether to include the stack trace of returned</span>
-<span class="sd">            errors.</span>
-<span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
-<span class="sd">            the response.</span>
+<span class="sd">            errors. Default is false.</span>
+<span class="sd">        :arg filter_path: Used to reduce the response. This parameter</span>
+<span class="sd">            takes a comma-separated list of filters. It supports using wildcards to</span>
+<span class="sd">            match any field or part of a field’s name. You can also exclude fields</span>
+<span class="sd">            with &quot;-&quot;.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
-<span class="sd">            statistics.</span>
+<span class="sd">            statistics. Default is True.</span>
 <span class="sd">        :arg nodes: Comma-separated list of node IDs or names used to</span>
 <span class="sd">            limit the request.</span>
 <span class="sd">        :arg parent_task_id: Parent task ID used to limit the tasks.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
-<span class="sd">            response.</span>
+<span class="sd">            response. Default is false.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg wait_for_completion: Should the request block until the</span>
@@ -250,13 +252,15 @@
 
 <span class="sd">        :arg task_id: ID of the task.</span>
 <span class="sd">        :arg error_trace: Whether to include the stack trace of returned</span>
-<span class="sd">            errors.</span>
-<span class="sd">        :arg filter_path: Comma-separated list of filters used to reduce</span>
-<span class="sd">            the response.</span>
+<span class="sd">            errors. Default is false.</span>
+<span class="sd">        :arg filter_path: Used to reduce the response. This parameter</span>
+<span class="sd">            takes a comma-separated list of filters. It supports using wildcards to</span>
+<span class="sd">            match any field or part of a field’s name. You can also exclude fields</span>
+<span class="sd">            with &quot;-&quot;.</span>
 <span class="sd">        :arg human: Whether to return human readable values for</span>
-<span class="sd">            statistics.</span>
+<span class="sd">            statistics. Default is True.</span>
 <span class="sd">        :arg pretty: Whether to pretty format the returned JSON</span>
-<span class="sd">            response.</span>
+<span class="sd">            response. Default is false.</span>
 <span class="sd">        :arg source: The URL-encoded request definition. Useful for</span>
 <span class="sd">            libraries that do not accept a request body for non-POST requests.</span>
 <span class="sd">        :arg timeout: Period to wait for a response. If no response is</span>
